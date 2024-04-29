@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+:root {
+    --merriweather-light: {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-style: normal;
+    };
+    
+    --merriweather-light-italic: {
+      font-family: "Merriweather", serif;
+      font-weight: 300;
+      font-style: italic;
+    };
+    
+    --merriweather-regular: {
+      font-family: "Merriweather", serif;
+      font-weight: 400;
+      font-style: normal;
+    };
+    
+    --merriweather-regular-italic: {
+      font-family: "Merriweather", serif;
+      font-weight: 400;
+      font-style: italic;
+    };
+    
+    --merriweather-bold: {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-style: normal;
+    };
+    
+    --merriweather-bold-italic: {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-style: italic;
+    };
+    
+    --merriweather-black: {
+      font-family: "Merriweather", serif;
+      font-weight: 900;
+      font-style: normal;
+    };
+    
+    --merriweather-black-italic: {
+      font-family: "Merriweather", serif;
+      font-weight: 900;
+      font-style: italic;
+    };
+}
+
+body {
+    font-family: var(--merriweather-black-italic);
+    background-color: #fff;
+    font-size: 1.1em;
+}
+
+.container-header{background-color: rgb(62, 11, 99);}
+.container-header > .wrapper {display: flex; justify-content: space-around;}
+.navigation-header {display: none;}
+.title_bank_principal { margin-left: .3em; font-size: 2.34em; color: #fff;}
+.bar-menu {font-size: 2em; color: #fff;}
+.title-header {display: flex; align-items: center;}
+
+.languaje-top , .Buttoms-Signin_Login , .header-bottom{ display: flex;}
+
+.languaje-top {justify-content: center; margin-left: -1.8em;}
+
+
+
+
