@@ -1,25 +1,26 @@
 import mysql.connector, functions
 
 def connect_mysql():
-    db = mysql.connector.connect(
+    conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
         password = ""
     )
-    return db
+    return conn
+
 def create_database():
-    bd = connect_mysql()
-    cursor = bd.cursor()
+    database = connect_mysql()
+    cursor = database.cursor()
 
     # cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
     cursor.execute("CREATE DATABASE salame_bank;")
 
-    bd.commit()
-    bd.close()
+    database.commit()
+    database.close()
 
 def create_tables():
-    bd = functions.connect_database()
-    cursor = bd.cursor()
+    database = functions.connect_database()
+    cursor = database.cursor()
 
     query = """
         CREATE TABLE clients (
@@ -45,5 +46,5 @@ def create_tables():
     """
     cursor.execute(query)
 
-    bd.commit()
-    bd.close()
+    database.commit()
+    database.close()

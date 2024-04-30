@@ -19,9 +19,9 @@ def signin():
 # @app.route("/results",methods=('GET', 'POST'))
 # def results():
 #     if request.method == ('POST'):
-#         formData = request.form
-#         user=formData['usuario']
-#         password=formData['contrasena']
+#         form_data = request.form
+#         user=form_data['usuario']
+#         password=form_data['contrasena']
 #         userData = Connect_user(user,password)
 
 #         if userData == False:
@@ -29,20 +29,27 @@ def signin():
 #         else:
 #             return render_template("results.html",login=True,userData=userData)
 
-# @app.route("/newUser", methods=('GET', 'POST'))
-# def newUser():
-#     if request.method == 'POST':
-#         formData = request.form
-#         user = formData['usuario']
-#         password = formData['contrasena']
-#         name = formData['name']
-#         surname1 = formData['surname1']
-#         surname2 = formData['surname2']
-#         age = formData['age']
-#         genre = formData['genre']
-#         register_user(user, password, name, surname1, surname2, age, genre)
+@app.route("/Sign-Account", methods=('GET', 'POST'))
+def new_client():
+    if request.method == 'POST':
+        form_data = request.form
+        name = form_data['name']
+        surname = form_data['surname']
+        age = form_data['age']
+        country = form_data['country']
+        functions.register_client(name, surname, age, country)
 
-#     return render_template("newUser.html")
+    return render_template("Sign-Account.html")
+
+@app.route("/Confirmed", methods=('GET', 'POST'))
+def new_client():
+    if request.method == 'POST':
+        form_data = request.form
+        username = form_data['name']
+        password = form_data['surname']
+        functions.register_account(username, password, 69000, False)
+
+    return render_template("Confirmed.html")
         
 # Configuración y arranque de la aplicación web
 app.run(host='localhost', port=5069, debug=True)
