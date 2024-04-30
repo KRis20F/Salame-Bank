@@ -42,11 +42,11 @@ def new_client():
     return render_template("Sign-Account.html")
 
 @app.route("/Confirmed", methods=('GET', 'POST'))
-def new_client():
+def new_account():
     if request.method == 'POST':
         form_data = request.form
-        username = form_data['name']
-        password = form_data['surname']
+        username = form_data['username']
+        password = form_data['password']
         functions.register_account(username, password, 69000, False)
 
     return render_template("Confirmed.html")
