@@ -6,6 +6,7 @@ app = Flask(__name__)
 # Declaración de rutas de la aplicación web
 @app.route("/")
 def home():
+    bbdd.create_database()
     return render_template("index.html")
 
 @app.route("/Login")
