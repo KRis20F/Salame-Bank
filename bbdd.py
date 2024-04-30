@@ -13,10 +13,15 @@ def create_database():
     cursor = database.cursor()
 
     # cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
-    cursor.execute("CREATE DATABASE salame_bank;")
+    cursor.execute("SHOW DATABASES LIKE 'salame_bank'")
+    exists = cursor.fetchone()
+    if not exists:
+        cursor.execute("CREATE DATABASE salame_bank;")
+        create_tables()
 
     database.commit()
     database.close()
+
 
 def create_tables():
     database = functions.connect_database()
