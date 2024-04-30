@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/">
+    <title>Registro</title>
+</head>
+<body>
+    <div id="container-form">
+        <div class="wrapper">
+            <h1>Welcome New User</h1>
+            <form action="new_client" method="post">
+                <ul>
+                    <li>
+                        <label for="name">Nombre: </label>
+                        <input type="text" id="name" name="name" required>
+                    </li>
+                    <li>
+                        <label for="surname">Apellido: </label>
+                        <input type="text" id="surname" name="surname" required>
+                    </li>
+                    <li>
+                        <label for="age">Edad</label>
+                        <input type="text" id="age" name="age">
+                    </li>
+                    <li>
+                        <label for="country">Pais: </label>
+                        <input type="text" id="country" name="country" required>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
