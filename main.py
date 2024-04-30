@@ -6,6 +6,7 @@ app = Flask(__name__)
 # Declaración de rutas de la aplicación web
 @app.route("/")
 def home():
+    bbdd.create_database()
     return render_template("index.html")
 
 @app.route("/Login")
@@ -29,25 +30,21 @@ def signin():
 #         else:
 #             return render_template("results.html",login=True,userData=userData)
 
-@app.route("/Sign-Account", methods=('GET', 'POST'))
-def new_client():
-    if request.method == 'POST':
-        form_data = request.form
-        name = form_data['name']
-        surname = form_data['surname']
-        age = form_data['age']
-        country = form_data['country']
-        functions.register_client(name, surname, age, country)
-
-    return render_template("Sign-Account.html")
-
 @app.route("/Confirmed", methods=('GET', 'POST'))
-def new_account():
+def new_client():
+    client = {}
+
     if request.method == 'POST':
         form_data = request.form
-        username = form_data['username']
-        password = form_data['password']
-        functions.register_account(username, password, 69000, False)
+        client["name"] = form_data["name"]
+        client["surname"] = form_data["surname"]
+        client["age"] = form_data["age"]
+        client["country"] = form_data["country"]
+
+        client["username"] = form_data['username']
+        client["password"] = form_data['password']
+        
+        functions.register_client(client)
 
     return render_template("Confirmed.html")
         

@@ -9,25 +9,29 @@ def connect_database():
     )
     return conn
 
-def register_client(name, surname, age, country):
+def register_client(data):
     database = connect_database()
     cursor = database.cursor()
 
     query = "INSERT INTO clients (name, surname, age, country) VALUES (%s, %s, %s, %s)"
-    values = (name, surname, age, country)
+    values = (data["name"], data["surname"], data["age"], data["country"])
     cursor.execute(query, values)
 
     print("cliente registrado")
 
+    id_client = cursor.lastrowid
+
+    register_account(data, id_client)
+
     database.commit()
     database.close()
 
-def register_account(username, password, currency, vip):
+def register_account(data, id_client):
     database = connect_database()
     cursor = database.cursor()
 
-    query = "INSERT INTO accounts (username, password, currency, vip) VALUES (%s, %s, %s, %s)"
-    values = (username, password, currency, vip)
+    query = "INSERT INTO accounts (id_client, username, password, currency, vip) VALUES (%s, %s, %s, %s, %s)"
+    values = (id_client, data["username"], data["password"], 69000, False)
     cursor.execute(query, values)
 
     print("cuenta registrada")
