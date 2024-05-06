@@ -3,37 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="../static/css/reset.css">
-    <link rel="stylesheet" href="../static/css/">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/form.css">
     <title>Registro</title>
 </head>
-<body>
-    <div id="container-form">
-        <div class="wrapper">
-            <h1>Welcome New User</h1>
-            <form action="new_client" method="post">
-                <ul>
-                    <li>
-                        <label for="name">Nombre: </label>
-                        <input type="text" id="name" name="name" required>
-                    </li>
-                    <li>
-                        <label for="surname">Apellido: </label>
-                        <input type="text" id="surname" name="surname" required>
-                    </li>
-                    <li>
-                        <label for="age">Edad</label>
-                        <input type="text" id="age" name="age">
-                    </li>
-                    <li>
-                        <label for="country">Pais: </label>
-                        <input type="text" id="country" name="country" required>
-                    </li>
-                </ul>
-            </form>
+<body data-barba="wrapper">
+    <div data-barba="container" data-barba-namespace="home">
+        <div class="container" id="container">
+            <div class="form-container sign-up" id="signup">
+                <form action="/Confirmed" method="post">
+                    <h1>Create Account</h1>
+                    <div class="social-icons">
+                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <span>For use your email for registeration</span>
+                    <input type="text"name="name" id="name"  placeholder="Tu nombre">
+                    <input type="text" name="surname" id="surname" placeholder="Tu apellido">
+                    <input type="number" name="age" id="age" placeholder="Tu edad">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="text" name="country" id="country" placeholder="Elige tu pais">
+
+                    <span>Ingresa tu nuevo usuario</span>
+                    <input type="text" name="username" id="username" placeholder="Username">
+                    <input type="password" name="password" id="password" placeholder="Password">
+    
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h1>Welcome Back!</h1>
+                        <p>Enter your personal details to use all of site features</p>
+                        <button class="hidden" id="login">Sign In</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <script src="../static/js/barba.min.js"></script>
+    <script src="../static/js/script.js"></script>
 </body>
 </html>

@@ -43,7 +43,8 @@ def new_client():
         client["surname"] = form_data["surname"]
         client["age"] = form_data["age"]
         client["country"] = form_data["country"]
-
+        client["email"] = form_data["email"]
+        
         client["username"] = form_data['username']
         client["password"] = form_data['password']
         

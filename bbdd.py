@@ -33,6 +33,7 @@ def create_tables():
             name VARCHAR(40),
             surname VARCHAR(60),
             age INT,
+            email VARCHAR(80),
             country VARCHAR(60)
         )
     """
@@ -45,7 +46,6 @@ def create_tables():
             username VARCHAR(20) UNIQUE,
             password VARCHAR(60),
             currency INT,
-            vip BOOL,
             FOREIGN KEY (id_client) REFERENCES clients(id_client)
         )
     """

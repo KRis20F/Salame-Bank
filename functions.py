@@ -13,8 +13,8 @@ def register_client(client):
     database = connect_database()
     cursor = database.cursor()
 
-    query = "INSERT INTO clients (name, surname, age, country) VALUES (%s, %s, %s, %s)"
-    values = (client["name"], client["surname"], client["age"], client["country"])
+    query = "INSERT INTO clients (name, surname, age, country, email) VALUES (%s, %s, %s, %s, %s)"
+    values = (client["name"], client["surname"], client["age"], client["country"], client["email"])
     cursor.execute(query, values)
 
     print("cliente registrado")
@@ -30,8 +30,8 @@ def register_account(client, id_client):
     database = connect_database()
     cursor = database.cursor()
 
-    query = "INSERT INTO accounts (id_client, username, password, currency, vip) VALUES (%s, %s, %s, %s, %s)"
-    values = (id_client, client["username"], client["password"], 69000, False)
+    query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
+    values = (id_client, client["username"], client["password"], 69000)
     cursor.execute(query, values)
 
     print("cuenta registrada")
