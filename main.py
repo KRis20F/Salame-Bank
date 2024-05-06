@@ -26,12 +26,12 @@ def new_connection():
         client["username"] = form_data['username']
         client["password"] = form_data['password']
 
-        client = functions.connect_account(client)
+        client_exists = functions.connect_account(client)
 
-        if not client:
-            return render_template("Login.html", login = False)
+        if client_exists:
+            return render_template("Home.html", client)
         else:
-            return render_template("Home.html", login = True)
+            return render_template("Login.html", login = False)
 
 @app.route("/Confirmed", methods=('GET', 'POST'))
 def new_client():

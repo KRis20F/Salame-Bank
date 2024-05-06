@@ -21,23 +21,17 @@ def register_client(client):
 
     id_client = cursor.lastrowid
 
-    register_account(client, id_client)
+    register_account(cursor, client, id_client)
 
     database.commit()
     database.close()
 
-def register_account(client, id_client):
-    database = connect_database()
-    cursor = database.cursor()
-
+def register_account(cursor, client, id_client):
     query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
     values = (id_client, client["username"], client["password"], 69000)
     cursor.execute(query, values)
 
     print("cuenta registrada")
-
-    database.commit()
-    database.close()
 
 def connect_account(client):
     database = connect_database()
