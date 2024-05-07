@@ -1,4 +1,4 @@
-import functions, bbdd
+import functions, db
 from flask import Flask, render_template, request;
 
 app = Flask(__name__)
@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Declaración de rutas de la aplicación web
 @app.route("/")
 def index():
-    bbdd.create_database()
+    db.create_database()
     return render_template("index.html")
 
 @app.route("/Login")
