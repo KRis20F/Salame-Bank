@@ -26,10 +26,11 @@ def new_connection():
         client["username"] = form_data['username']
         client["password"] = form_data['password']
 
-        client_exists = functions.connect_account(client)
+        client = functions.connect_account(client)
 
-        if client_exists:
-            return render_template("Home.html", client)
+        if client:
+            return render_template("Home.html", client_info = client)
+
         else:
             return render_template("Login.html", login = False)
 

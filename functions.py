@@ -37,6 +37,17 @@ def connect_account(client):
     database = connect_database()
     cursor = database.cursor()
 
+    client_info = {}
+
+    client_info = get_account(client, client_info, cursor)
+    client_info = get_client(client, client_info, cursor)
+
+    database.commit()
+    database.close()
+
+    return client_info
+
+def get_account(client, info, cursor):
     query = """
         SELECT *
         FROM accounts
@@ -45,16 +56,29 @@ def connect_account(client):
     values = (client["username"], client["password"])
     cursor.execute(query, values)
 
-    result = cursor.fetchall()
+    account_info = cursor.fetchall()
 
-    database.commit()
-    database.close()
+    info["username"] = account_info[0][2]
+    info["password"] = account_info[0][3]
+    info["currency"] = account_info[0][4]
 
-    if result:
-        return True
-    else:
-        return False
+    return info
 
+def get_client(client, info, cursor):
+    query = """
+        SELECT *
+        FROM clients
+        INNER JOIN accounts ON clients.id_client = accounts.id_client
+        WHERE accounts.username = %s AND accounts.password = %s;
+    """
+    values = (client["username"], client["password"])
+    cursor.execute(query, values)
+
+    account_info = cursor.fetchall()
+
+    info["name"] = account_info[0][1]
+
+    return info
 
 def deposit(client, value):
     database = connect_database()

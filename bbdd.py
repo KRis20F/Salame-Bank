@@ -32,9 +32,9 @@ def create_tables():
             id_client INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(40),
             surname VARCHAR(60),
-            age INT,¡
+            age INT,
             country VARCHAR(60),
-            email VARCHAR(80)
+            email VARCHAR(80) UNIQUE
         )
     """
     cursor.execute(query)

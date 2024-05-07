@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
     <link rel="stylesheet" href="../static/css/reset.css">    
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" href="../static/img/logo Bank.jpeg" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <title>Document</title>
+    <title>Salame Bank</title>
 </head>
 <body>
     <header id="header-all-container">
         <div class="container-header">
-            <div class="wrapper">
-                <div class="title-header">
-                    <i class="fa-solid fa-building-columns"></i> <!-- aqui debe ir icono del banco, se pondra un bank para emular -->
-                    <h1 class="title_bank_principal">Salame Bank</h1>
-                </div>
+            <div class="wrapper header-wrapper">
+                <a href="index">
+                    <div class="title-header">
+                    <img src="../static/img/logo Bank.jpeg" style="width: 69px;" alt="salame bank logo">
+                        <h1 class="title_bank_principal">Salame Bank</h1>
+                    </div>
+                </a>
                 
+                <div class="options-header">
+                    <div class="header-bottom">
+                        <ul class="Buttoms-Signin_Login sing-log-pc">
+                            <li class="btn-losing"><a class="btn-buttom-bar registrer-btn-phone" href="Login">Iniciar Sesion</a></li>
+                            <li class="btn-losing"><a class="btn-buttom-bar login-btn-phone" href="Signin">Registrarse</a></li>
+                        </ul>
+                    </div>
+                </div>
+
                 <button id="open-bar" class="open-main"><i class="fa-solid fa-bars bar-menu"></i></button>
         
                 <nav class="navigation-header" id="nav-header">
@@ -127,10 +139,9 @@
         </div>
     </header>
     <div class="hero-about">
-        <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev"
-            onclick="app.processingButton(event)">
+        <button class="carrusel-arrow carrusel-arrow-left carrusel-prev" id="btn-left">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
-                class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+                class="svg-inline--fa fa-chevron-left fa-w-10 style-icon" role="img" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 320 512">
                 <path fill="currentColor"
                     d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
@@ -138,13 +149,19 @@
             </svg>
         </button>
 
-        <div class="carrusel-container" id="carrusel-list">
+        <div class="carrusel-container" id="slider-hero">
             
             <div class="carrusel-bank">
+                <div class="about-bank-carrusel">
+                    <div class="container-text carrusel-text">
+                        <h2>El Banco que siempre vela por ti</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore. dadadadadadaddadadddd</p>
+                    </div>
+                </div>
                 <div class="image-carrusel">
-                    <picture>
+                    <picture class="img-carrusel">
                         <img
-                        sizes="(max-width: 1000px) 100vw, 1000px"
+                        sizes="(max-width: 1100px) 100vw, 1100px"
                         srcset="
                         ../static/img/images-responsives/1_u9djo3_c_scale,w_200.jpg 200w,
                         ../static/img/images-responsives/1_u9djo3_c_scale,w_461.jpg 461w,
@@ -154,49 +171,59 @@
                         alt="">
                     </picture>
                 </div>
-                <div class="about-bank-carrusel">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore. dadadadadadadadadad</p>
-                </div>
-            </div>
-            <div class="carrusel-bank">
-                <picture>
-                    <img
-                    sizes="(max-width: 1000px) 100vw, 1000px"
-                    srcset="
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_200.jpg 200w,
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_641.jpg 641w,
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_941.jpg 941w,
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1126.jpg 1126w,
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1323.jpg 1323w,
-                    ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg 1400w"
-                    src="../static/img/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg"
-                    alt="">
-                </picture>
-                <div class="about-bank-carrusel">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore. dadadadadadaddadadddd</p>
-                </div>
+                
             </div>
             <div class="carrusel-bank">
                 <div class="about-bank-carrusel">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore.</p>
+                    <div class="container-text carrusel-text">
+                        <h2>El Banco que siempre vela por ti</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore. dadadadadadaddadadddd</p>
+                    </div>
                 </div>
-                <picture>
-                    <img src="" alt="carrussel salamebank">
-                </picture>
+                <div class="image-carrusel">
+                    <picture class="img-carrusel">
+                        <img
+                        sizes="(max-width: 1100px) 100vw, 1100px"
+                        srcset="
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_200.jpg 200w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_641.jpg 641w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_941.jpg 941w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1126.jpg 1126w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1323.jpg 1323w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg 1400w"
+                        src="../static/img/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg"
+                        alt="">
+                    </picture>
+                </div>
+                
             </div>
             <div class="carrusel-bank">
                 <div class="about-bank-carrusel">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore.</p>
+                    <div class="container-text carrusel-text">
+                        <h2>El Banco que siempre vela por ti</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut, modi, ipsa perferendis iure corrupti voluptatibus asperiores magni soluta omnis? Maiores mollitia quam est labore. dadadadadadaddadadddd</p>
+                    </div>
                 </div>
-                <picture>
-                    <img src="" alt="carrussel salamebank">
-                </picture>
+                <div class="image-carrusel">
+                    <picture class="img-carrusel">
+                        <img
+                        sizes="(max-width: 1100px) 100vw, 1100px"
+                        srcset="
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_200.jpg 200w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_641.jpg 641w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_941.jpg 941w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1126.jpg 1126w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1323.jpg 1323w,
+                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg 1400w"
+                        src="../static/img/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg"
+                        alt="">
+                    </picture>
+                </div>
             </div>
         </div>
-        <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next"
-        onclick="app.processingButton(event)">
+        <button class="carrusel-arrow carrusel-arrow-right carrusel-next" id="btn-next">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-            class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+            class="svg-inline--fa fa-chevron-right fa-w-10 style-icon" role="img" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512">
             <path fill="currentColor"
                 d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
@@ -207,29 +234,29 @@
     <main id="main-landing_page">
         <section class="advantages-bank">
             <div class="wrapper container-bank-advantages">
-                <h2>La Ventaja de estar con Nosotros</h2>
+                <h2 class="title-landing">La Ventaja de estar con Nosotros</h2>
                 <div class="wrapper-advantages">
                     <div class="image-reference">
-                        <!-- <img src="https://img.freepik.com/foto-gratis/hombre-sonriente-telefono-movil_23-2148531038.jpg" alt=""> -->
+                        <img src="../static/img/coin_cell-removebg-preview.png" alt="">
                     </div>
-                    <div class="text-advantages">
+                    <div class="text-advantages size-down-left">
                         <i></i>
-                        <h2></h2>
+                        <h2>0 Comisiones ni Condiciones</h2>
                         <p></p>
                     </div>
                     <div class="text-advantages">
                         <i></i>
-                        <h2></h2>
+                        <h2>Servicio de Calidad las 24 horas</h2>
                         <p></p>
                     </div>
                     <div class="text-advantages">
                         <i></i>
-                        <h2></h2>
+                        <h2>Tarifas competitivas y beneficios adicionales: </h2>
                         <p></p>
                     </div>
                     <div class="text-advantages">
                         <i></i>
-                        <h2></h2>
+                        <h2>Seguridad y protección: </h2>
                         <p></p>
                     </div>
                 </div>
