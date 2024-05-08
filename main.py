@@ -32,7 +32,7 @@ def new_connection():
             return render_template("Home.html", client_info = client)
 
         else:
-            return render_template("Login.html", login = False)
+            return render_template("Login.html", login = False, error = client)
 
 @app.route("/Confirmed", methods=('GET', 'POST'))
 def new_client():

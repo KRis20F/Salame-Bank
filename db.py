@@ -9,19 +9,22 @@ def connect_mysql():
     return conn
 
 def create_database():
-    database = connect_mysql()
-    cursor = database.cursor()
+    try:
+        database = connect_mysql()
+        cursor = database.cursor()
 
-    cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
-    cursor.execute("SHOW DATABASES LIKE 'salame_bank'")
-    exists = cursor.fetchone()
-    if not exists:
-        cursor.execute("CREATE DATABASE salame_bank;")
-        create_tables()
+        # cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
+        cursor.execute("SHOW DATABASES LIKE 'salame_bank'")
+        exists = cursor.fetchone()
+        if not exists:
+            cursor.execute("CREATE DATABASE salame_bank;")
+            create_tables()
 
-    database.commit()
-    database.close()
+        database.commit()
+        database.close()
 
+    except Exception as error:
+        print("Error detected:", error)
 
 def create_tables():
     database = functions.connect_database()
@@ -45,6 +48,7 @@ def create_tables():
             username VARCHAR(20) UNIQUE,
             password VARCHAR(60),
             currency INT,
+            IBAN VARCHAR(30),
             FOREIGN KEY (id_client) REFERENCES clients(id_client)
         );
     """
@@ -77,7 +81,7 @@ def create_triggers(cursor):
         BEGIN
             IF NEW.currency < 0 THEN
                 SIGNAL SQLSTATE '45000' 
-                SET MESSAGE_TEXT = "CURRENCY NO PUEDE TENER BALANCE NEGATIVO";
+                SET MESSAGE_TEXT = "NEGATIVE BALANCE ERROR";
             END IF;
         END;
     """

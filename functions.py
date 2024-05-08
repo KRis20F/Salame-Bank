@@ -10,21 +10,25 @@ def connect_database():
     return conn
 
 def register_client(client):
-    database = connect_database()
-    cursor = database.cursor()
+    try:
+        database = connect_database()
+        cursor = database.cursor()
 
-    query = "INSERT INTO clients (name, surname, age, country, email) VALUES (%s, %s, %s, %s, %s)"
-    values = (client["name"], client["surname"], client["age"], client["country"], client["email"])
-    cursor.execute(query, values)
+        query = "INSERT INTO clients (name, surname, age, country, email) VALUES (%s, %s, %s, %s, %s)"
+        values = (client["name"], client["surname"], client["age"], client["country"], client["email"])
+        cursor.execute(query, values)
 
-    print("cliente registrado")
+        print("cliente registrado")
 
-    id_client = cursor.lastrowid
+        id_client = cursor.lastrowid
 
-    register_account(cursor, client, id_client)
+        register_account(cursor, client, id_client)
 
-    database.commit()
-    database.close()
+        database.commit()
+        database.close()
+
+    except Exception as error:
+        print("Error detected:", error)
 
 def register_account(cursor, client, id_client):
     query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
@@ -34,18 +38,24 @@ def register_account(cursor, client, id_client):
     print("cuenta registrada")
 
 def connect_account(client):
-    database = connect_database()
-    cursor = database.cursor()
-
     client_info = {}
 
-    client_info = get_account(client, client_info, cursor)
-    client_info = get_client(client, client_info, cursor)
+    try:
+        database = connect_database()
+        cursor = database.cursor()
 
-    database.commit()
-    database.close()
+        client_info = get_account(client, client_info, cursor)
+        client_info = get_client(client, client_info, cursor)
 
-    return client_info
+        database.commit()
+        database.close()
+    
+    except Exception as error:
+        print("Error detected:", error)
+        client_info = error
+    
+    finally:
+        return client_info
 
 def get_account(client, info, cursor):
     query = """
@@ -81,53 +91,75 @@ def get_client(client, info, cursor):
     return info
 
 def deposit(client, value):
-    database = connect_database()
-    cursor = database.cursor()
+    try:
+        database = connect_database()
+        cursor = database.cursor()
 
-    query = """
-        UPDATE accounts
-        SET currency = currency + %s
-        WHERE username = %s AND password = %s;
-    """
-    values = (value, client["username"], client["password"])
-    cursor.execute(query, values)
+        query = """
+            UPDATE accounts
+            SET currency = currency + %s
+            WHERE username = %s AND password = %s;
+        """
+        values = (value, client["username"], client["password"])
+        cursor.execute(query, values)
 
-    print("dinero ingresado")
+        print("dinero ingresado")
 
-    database.commit()
-    database.close()
+        database.commit()
+        database.close()
+
+        return True
+
+    except Exception as error:
+        print("Error detected:", error)
+        return False
+
 
 def withdraw(client, value):
-    database = connect_database()
-    cursor = database.cursor()
+    try:
+        database = connect_database()
+        cursor = database.cursor()
 
-    query = """
-        UPDATE accounts
-        SET currency = currency - %s
-        WHERE username = %s AND password = %s;
-    """
-    values = (value, client["username"], client["password"])
-    cursor.execute(query, values)
+        query = """
+            UPDATE accounts
+            SET currency = currency - %s
+            WHERE username = %s AND password = %s;
+        """
+        values = (value, client["username"], client["password"])
+        cursor.execute(query, values)
 
-    print("dinero retirado")
+        print("dinero retirado")
 
-    database.commit()
-    database.close()
+        database.commit()
+        database.close()
+
+        return True
+    
+    except Exception as error:
+        print("Error detected:", error)
+        return False
 
 def transfer(client, receiver, value):
-    withdraw(client, value)
-    database = connect_database()
-    cursor = database.cursor()
+    try:
+        withdraw(client, value)
+        database = connect_database()
+        cursor = database.cursor()
 
-    query = """
-        UPDATE accounts
-        SET currency = currency + %s
-        WHERE username = %s;
-    """
-    values = (value, receiver)
-    cursor.execute(query, values)
+        query = """
+            UPDATE accounts
+            SET currency = currency + %s
+            WHERE username = %s;
+        """
+        values = (value, receiver)
+        cursor.execute(query, values)
 
-    print("dinero enviado")
+        print("dinero enviado")
 
-    database.commit()
-    database.close()
+        database.commit()
+        database.close()
+
+        return True
+    
+    except Exception as error:
+        print("Error detected:", error)
+        return False
