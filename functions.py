@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector, random , string
 
 def connect_database():
     conn = mysql.connector.connect(
@@ -8,6 +8,18 @@ def connect_database():
         database = "salame_bank"
     )
     return conn
+
+
+def createIBAN():
+    
+    iban_prefix = 'ES' 
+     
+    iban_suffix = ''.join(random.choices(string.digits, k=10))
+    
+    new_iban = iban_prefix + iban_suffix
+    
+    return new_iban
+
 
 def register_client(client):
     try:
@@ -31,8 +43,8 @@ def register_client(client):
         print("Error detected:", error)
 
 def register_account(cursor, client, id_client):
-    query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
-    values = (id_client, client["username"], client["password"], 69000)
+    query = "INSERT INTO accounts (id_client, username, password, currency, IBAN) VALUES (%s, %s, %s, %s, %s)"
+    values = (id_client, client["username"], client["password"], 69000 , createIBAN())
     cursor.execute(query, values)
 
     print("cuenta registrada")
@@ -71,6 +83,7 @@ def get_account(client, info, cursor):
     info["username"] = account_info[0][2]
     info["password"] = account_info[0][3]
     info["currency"] = account_info[0][4]
+    info["IBAN"] = account_info[0][5]
 
     return info
 
