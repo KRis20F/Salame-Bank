@@ -1,5 +1,4 @@
-import mysql.connector
-import functions
+import mysql.connector, functions
 
 def connect_mysql():
     conn = mysql.connector.connect(
