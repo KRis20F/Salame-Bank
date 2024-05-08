@@ -20,15 +20,6 @@
                             <h1 class="title_bank_principal">Salame Bank</h1>
                         </div>
                     </a>
-                    
-                    <div class="options-header">
-                        <div class="header-bottom">
-                            <ul class="Buttoms-Signin_Login sing-log-pc">
-                                <li class="btn-losing"><a class="btn-buttom-bar registrer-btn-phone" href="Login">Iniciar Sesion</a></li>
-                                <li class="btn-losing"><a class="btn-buttom-bar login-btn-phone" href="Signin">Registrarse</a></li>
-                            </ul>
-                        </div>
-                    </div>
     
                     <button id="open-bar" class="open-main"><i class="fa-solid fa-bars bar-menu"></i></button>
             
@@ -54,17 +45,41 @@
         </header>
 
         <main class="main-home">
-            <section class="container-sald">
-                <h2>Bienvenido {{client_info["username"]}}</h2>
-                <p>Saldo Actual: {{client_info["currency"]}}</p>
-
-                
-
-            </section>
+            <div class="main-all">
+                <section class="container-info-top">
+                    <div class="wrapper">
+                        <div class="name-cursor">
+                            <h2>Bienvenido {{client_info["username"]}}</h2>
+                        </div>
+                        <div class="currecy-cursor">
+                            <div class="currency actual">
+                                <p>Saldo Actual: {{client_info["currency"]}}</p>
+                            </div>
+                            <div class="currency min">
+                                <p>Total Gastado : {{client_info["currecy"]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <aside class="option-pc">
+                <ul class="container-options">
+                    <li class="ul-option-home">
+                        <a href="" class="btn-options">Retirar Dinero</a>
+                    </li>
+                    <li class="ul-option-home">
+                        <a href="" class="btn-options">Ingresar Dinero</a>
+                    </li>
+                    <li class="ul-option-home">
+                        <a href="" class="btn-options">Transferir Dinero </a>
+                    </li>
+                    <li class="ul-option-home">
+                        <a href="" class="btn-options">Cerrar Sesion</a>
+                    </li>
+                </ul>
+            </aside>
         </main>
-        <aside>
-
-        </aside>
+        
     </div>
 
 
