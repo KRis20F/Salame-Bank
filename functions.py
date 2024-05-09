@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector, random , string
 
 def connect_database():
     conn = mysql.connector.connect(
@@ -35,8 +35,8 @@ def register_client(client):
         return False
 
 def register_account(cursor, client, id_client):
-    query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
-    values = (id_client, client["username"], client["password"], 69000)
+    query = "INSERT INTO accounts (id_client, username, password, currency, IBAN) VALUES (%s, %s, %s, %s, %s)"
+    values = (id_client, client["username"], client["password"], 69000 , create_IBAN())
     cursor.execute(query, values)
 
     print("cuenta registrada")
@@ -79,6 +79,7 @@ def get_account(client, info, cursor):
     info["username"] = account_info[0][2]
     info["password"] = account_info[0][3]
     info["currency"] = account_info[0][4]
+    info["IBAN"] = account_info[0][5]
 
     return info
 
@@ -98,32 +99,42 @@ def get_client(client, info, cursor):
 
     return info
 
+def create_IBAN():
+    iban_prefix = 'ES' 
+    iban_suffix = ''.join(random.choices(string.digits, k=10))
+    new_iban = iban_prefix + iban_suffix
+
+    return new_iban
+
 def deposit(client, password, value):
     try:
-        database = connect_database()
-        cursor = database.cursor()
+        if client["password"] == password:
+            database = connect_database()
+            cursor = database.cursor()
 
-        query = """
-            UPDATE accounts
-            SET currency = currency + %s
-            WHERE username = %s AND password = %s;
-        """
-        values = (value, client["username"], password)
-        cursor.execute(query, values)
+            query = """
+                UPDATE accounts
+                SET currency = currency + %s
+                WHERE username = %s AND password = %s;
+            """
+            values = (value, client["username"], password)
+            cursor.execute(query, values)
 
-        print("dinero ingresado")
+            print("dinero ingresado")
 
-        database.commit()
-        database.close()
+            database.commit()
+            database.close()
 
-        return True
+            return True
+        else:
+            return False
 
     except Exception as error:
         print("Error detected:", error)
 
         return False
 
-def withdraw(client, value):
+def withdraw(client, password, value):
     try:
         database = connect_database()
         cursor = database.cursor()
@@ -133,7 +144,7 @@ def withdraw(client, value):
             SET currency = currency - %s
             WHERE username = %s AND password = %s;
         """
-        values = (value, client["username"], client["password"])
+        values = (value, client["username"], password)
         cursor.execute(query, values)
 
         print("dinero retirado")
@@ -148,9 +159,9 @@ def withdraw(client, value):
 
         return False
 
-def transfer(client, receiver, value):
+def transfer(client, receiver, password, value):
     try:
-        withdraw(client, value)
+        withdraw(client, password, value)
         database = connect_database()
         cursor = database.cursor()
 
