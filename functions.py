@@ -1,4 +1,4 @@
-import mysql.connector, random , string
+import mysql.connector
 
 def connect_database():
     conn = mysql.connector.connect(
@@ -8,18 +8,6 @@ def connect_database():
         database = "salame_bank"
     )
     return conn
-
-
-def createIBAN():
-    
-    iban_prefix = 'ES' 
-     
-    iban_suffix = ''.join(random.choices(string.digits, k=10))
-    
-    new_iban = iban_prefix + iban_suffix
-    
-    return new_iban
-
 
 def register_client(client):
     try:
@@ -39,12 +27,16 @@ def register_client(client):
         database.commit()
         database.close()
 
+        return True
+
     except Exception as error:
         print("Error detected:", error)
+        
+        return False
 
 def register_account(cursor, client, id_client):
-    query = "INSERT INTO accounts (id_client, username, password, currency, IBAN) VALUES (%s, %s, %s, %s, %s)"
-    values = (id_client, client["username"], client["password"], 69000 , createIBAN())
+    query = "INSERT INTO accounts (id_client, username, password, currency) VALUES (%s, %s, %s, %s)"
+    values = (id_client, client["username"], client["password"], 69000)
     cursor.execute(query, values)
 
     print("cuenta registrada")
@@ -62,17 +54,13 @@ def connect_account(client):
         database.commit()
         database.close()
     
-    except ConnectionError as connection_error:
-        print("Error de conexión:", connection_error)
-        client_info = "Error de conexión, intentalo más tarde"
-    
     except IndexError as index_error:
         print("Índice fuera de límites:", index_error)
         client_info = "Datos incorrectos, intentalo de nuevo"
     
     except Exception as error:
         print("Error detectado:", error)
-        client_info = error
+        client_info = "Error de conexión, intentalo más tarde"
     
     finally:
         return client_info
@@ -91,7 +79,6 @@ def get_account(client, info, cursor):
     info["username"] = account_info[0][2]
     info["password"] = account_info[0][3]
     info["currency"] = account_info[0][4]
-    info["IBAN"] = account_info[0][5]
 
     return info
 
@@ -133,7 +120,9 @@ def deposit(client, value):
 
     except Exception as error:
         print("Error detected:", error)
+
         return False
+
 
 def withdraw(client, value):
     try:
@@ -157,6 +146,7 @@ def withdraw(client, value):
     
     except Exception as error:
         print("Error detected:", error)
+
         return False
 
 def transfer(client, receiver, value):
@@ -182,4 +172,5 @@ def transfer(client, receiver, value):
     
     except Exception as error:
         print("Error detected:", error)
+
         return False

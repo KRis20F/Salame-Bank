@@ -1,8 +1,7 @@
-import functions, db, os
-from flask import Flask, render_template, request, session;
+import functions, db
+from flask import Flask, render_template, request;
 
 app = Flask(__name__)
-app.secret_key = "salamaleko"
 
 @app.route("/")
 def index():
@@ -17,7 +16,7 @@ def login():
 def signin():
     return render_template("Signin.html")
 
-@app.route("/Home", methods=["POST"])
+@app.route("/Home", methods=("POST",))
 def new_connection():
     client = {}
 
@@ -27,11 +26,11 @@ def new_connection():
 
     client = functions.connect_account(client)
 
-    if client:
-        session['client_info'] = client
-        return render_template("Home.html", client_info=client)
+    if type(client) is dict:
+        return render_template("Home.html", client_info = client)
     else:
-        return render_template("Login.html", error=client)
+        return render_template("Login.html", error = client)
+
 
 @app.route("/Confirmed", methods=("POST",))
 def new_client():
@@ -52,29 +51,17 @@ def new_client():
     if is_created:
         return render_template("Confirmed.html")
     else:
-        return render_template("Signin.html", error = "Error de conexión, intentalo más tarde")
-
-@app.route("/deposit")
-def deposit_section():
-    client = session.pop('client_info', None)
-
-    if client:
-        return render_template("deposit.html", client_info = client)
-    else:
-        return "Error: No se encontraron los datos del cliente en la sesión"
-
-@app.route("/Completed", methods=("POST",))
+        return render_template("Signin.html", error = "el servidor esta caido, intentalo más tarde")
+    
+@app.route("/deposit", methods=("POST",))
 def deposit_money():
-    client = session.pop('client_info', None)
+    client = {}
 
     form_data = request.form
-    # client["password"] = form_data["password"]
+    client["username"] = form_data["money"]
+    client["password"] = form_data["money"]
+    client["money"] = form_data["money"]
     
-    is_completed = functions.deposit(client, form_data["money"])
-
-    if is_completed:
-        return render_template("home.html", client_info = client)
-    else:
-        return render_template("deposit.html", error = "Error de conexión, intentalo más tarde")
-
+    functions.deposit(client)
+        
 app.run(host='localhost', port=5069, debug=True)
