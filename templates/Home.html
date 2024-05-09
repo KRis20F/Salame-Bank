@@ -49,15 +49,48 @@
                 <section class="container-info-top">
                     <div class="wrapper">
                         <div class="name-cursor">
-                            <h2>Bienvenido {{client_info["username"]}}</h2>
+                            <h2>Bienvenido {{client_info["name"]}}</h2>
                         </div>
-                        <div class="currecy-cursor">
-                            <div class="currency actual">
-                                <p>Saldo Actual: {{client_info["currency"]}}</p>
+                        <div class="currecy-cursor cointainer-cursor">
+                            <div class="currency-actual">
+                                <p> {{client_info["currency"]}}.00</p>
                             </div>
-                            <div class="currency min">
-                                <p>Total Gastado : {{client_info["currecy"]}}</p>
+                            <div class="btn-options-cursor">
+                                <ul class="ul-btn-cursor">
+                                    <li class="li-btn-cursor">
+                                        <a href="deposit" class="btn-option">
+                                            <i class="fa-solid fa-plus radius-link radius-link1"></i>
+                                            Retirar
+                                        </a>
+                                    </li>
+                                    <li class="li-btn-cursor">
+                                        <a href="#" class="btn-option">
+                                            <i class="fa-solid fa-arrow-up radius-link radius-link2"></i>
+                                            Ingresar 
+                                        </a>
+                                    </li>
+                                    <li class="li-btn-cursor">
+                                        <a href="Transferir-Dinero" class="btn-option">
+                                            <i class="fa-solid fa-arrow-down radius-link radius-link3"></i>
+                                            Transferir
+                                        </a>
+                                    </li>
+
+                                </ul>
+
                             </div>
+                           
+                        </div>
+                        <div class="history-client option-info-client">
+                            <div class="info-iban">
+                                <p>IBAN : {{client_info["IBAN"]}}</p>
+                            </div> 
+                            <div class="btn-view-history">
+                                <p class="btn-option">Transacciones</p>
+                                <ul>
+                                    <li></li>
+                                </ul>
+                            </div>                          
                         </div>
                     </div>
                 </section>
@@ -65,13 +98,7 @@
             <aside class="option-pc">
                 <ul class="container-options">
                     <li class="ul-option-home">
-                        <a href="" class="btn-options">Retirar Dinero</a>
-                    </li>
-                    <li class="ul-option-home">
                         <a href="" class="btn-options">Ingresar Dinero</a>
-                    </li>
-                    <li class="ul-option-home">
-                        <a href="" class="btn-options">Transferir Dinero </a>
                     </li>
                     <li class="ul-option-home">
                         <a href="" class="btn-options">Cerrar Sesion</a>

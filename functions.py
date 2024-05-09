@@ -62,8 +62,16 @@ def connect_account(client):
         database.commit()
         database.close()
     
+    except ConnectionError as connection_error:
+        print("Error de conexión:", connection_error)
+        client_info = "Error de conexión, intentalo más tarde"
+    
+    except IndexError as index_error:
+        print("Índice fuera de límites:", index_error)
+        client_info = "Datos incorrectos, intentalo de nuevo"
+    
     except Exception as error:
-        print("Error detected:", error)
+        print("Error detectado:", error)
         client_info = error
     
     finally:
@@ -126,7 +134,6 @@ def deposit(client, value):
     except Exception as error:
         print("Error detected:", error)
         return False
-
 
 def withdraw(client, value):
     try:
