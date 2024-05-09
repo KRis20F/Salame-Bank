@@ -98,7 +98,7 @@ def get_client(client, info, cursor):
 
     return info
 
-def deposit(client, value):
+def deposit(client, password, value):
     try:
         database = connect_database()
         cursor = database.cursor()
@@ -108,7 +108,7 @@ def deposit(client, value):
             SET currency = currency + %s
             WHERE username = %s AND password = %s;
         """
-        values = (value, client["username"], client["password"])
+        values = (value, client["username"], password)
         cursor.execute(query, values)
 
         print("dinero ingresado")
@@ -122,7 +122,6 @@ def deposit(client, value):
         print("Error detected:", error)
 
         return False
-
 
 def withdraw(client, value):
     try:

@@ -1,7 +1,9 @@
-import functions, db
-from flask import Flask, render_template, request;
+import functions, db, os
+from flask import Flask, render_template, request, session;
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
+
 
 @app.route("/")
 def index():
@@ -27,6 +29,7 @@ def new_connection():
     client = functions.connect_account(client)
 
     if type(client) is dict:
+        session["client_info"] = client
         return render_template("Home.html", client_info = client)
     else:
         return render_template("Login.html", error = client)
@@ -52,16 +55,24 @@ def new_client():
         return render_template("Confirmed.html")
     else:
         return render_template("Signin.html", error = "el servidor esta caido, intentalo más tarde")
-    
-@app.route("/deposit", methods=("POST",))
-def deposit_money():
-    client = {}
 
+@app.route("/deposit")
+def deposit_section():
+    return render_template("deposit.html")
+
+@app.route("/Completed", methods=("POST",))
+def deposit_money():
     form_data = request.form
-    client["username"] = form_data["money"]
-    client["password"] = form_data["money"]
-    client["money"] = form_data["money"]
+
+    password = form_data["password"]
+    money = form_data["money"]
     
-    functions.deposit(client)
+    is_completed = functions.deposit(session["client_info"], password, money)
+
+    if is_completed:
+        return render_template("Completed.html")
+    else:
+        return render_template("deposit.html")
+
         
 app.run(host='localhost', port=5069, debug=True)

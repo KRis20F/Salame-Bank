@@ -13,7 +13,7 @@ def create_database():
         database = connect_mysql()
         cursor = database.cursor()
 
-        cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
+        # cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
         cursor.execute("SHOW DATABASES LIKE 'salame_bank'")
         exists = cursor.fetchone()
         if not exists:
