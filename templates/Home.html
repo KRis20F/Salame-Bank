@@ -96,24 +96,22 @@
                             
                             <div class="btn-view-history">
                                 <h2 class="h2-history">Transacciones</h2>
-                                <ul class="ul-list-transactions">
-                                    <li class="container-about">
-                                        <i class="fa-solid fa-cart-shopping shoppin-transaction"></i>
-                                        <ul class="info-transation">
-                                            <li>Fecha: {{ transaccion["date"] }}</li>
-                                            <li>Hora: {{ transaccion["time"] }}</li>
-                                        </ul>
-                                        <div>
-                                            <i class="fa-solid fa-plus"></i> {{ transaccion["balance"] }}</div>
-                                    </li>
-                                        <!-- {% endfor %}
-                                        {% for transaccion in data_transactions %} -->
-                                    </li>                                    
-                                    <!-- <li class="list-transation-none">
-                                        <img src="../static/img/mony-removebg-preview.png" alt="no hay nada mony salame bank">
-                                        No haz hecho alguna transaccion por ahora.
-                                    </li> -->
-                                </ul>
+                                {% if transactions_info %}
+                                    <ul class="ul-list-transactions">
+                                        <li class="container-about">
+                                            <i class="fa-solid fa-cart-shopping shoppin-transaction"></i>
+                                            <ul class="info-transation">
+                                                <li>Fecha: {{ transactions_info[0][0] }}</li>
+                                                <li>Hora: {{ transactions_info[0][1] }}</li>
+                                            </ul>
+                                            <div>
+                                                <i class="fa-solid fa-plus"></i> {{ transactions_info[0][2] }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                {% else %}
+                                    <h2>no hicistes nada brodi</h2>
+                                {% endif %}
                             </div>                          
                         </div>
                     </div>
