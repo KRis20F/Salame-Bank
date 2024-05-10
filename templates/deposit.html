@@ -26,16 +26,21 @@
         <main class="form-all">
             <section class="container-form-money">
                 <form action="/Completed" method="post" class="form-money">
-                    <!-- <label for="username">{{username}}</label>
-                    <input type="number" name= "username" id="username"> -->
+                     
+                    <input type="hidden" name="action" value="deposit">
+                    <ul>
+                        <li class="form-li">
+                            
+                            <input type="number" name="money" id="money" required>
+                            <label class="center" for="money">Dinero a depositar</label>
+                        </li>
+                        <li class="form-li label-top">
+                            <input class="input-top-left2" type="password" name="password" id="password" required>
+                            <label class="top-left" for="password">Ingrese su contraseña</label>
+                        </li>
+                    </ul>
     
-                    <label for="money">Dinero a depositar</label>
-                    <input type="number" name="money" id="money">
-    
-                    <label for="password">Ingrese su contraseña</label>
-                    <input type="password" name="password" id="password">
-    
-                    <input type="submit" value="Enviar">
+                    <input type="submit" id="btn-submit" value="Depositar">
                 </form>
             </section>
         </main>

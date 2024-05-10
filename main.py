@@ -1,5 +1,5 @@
 import functions, db, os
-from flask import Flask, render_template, request, session;
+from flask import Flask, render_template, request, session, redirect, url_for;
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -30,7 +30,9 @@ def new_connection():
 
         if isinstance(client, dict):
             session["client_info"] = client
-            return render_template("Home.html", client_info = client)
+            data_transations = functions.check_transactions(client)
+            
+            return render_template("Home.html", client_info = client, data_transations = data_transations)
         else:
             return render_template("Login.html", error_message = client)
         
@@ -42,6 +44,12 @@ def new_connection():
             return render_template("Home.html", client_info = client_info)
         else:
             return render_template("Login.html")
+        
+        
+@app.route('/logout')
+def logout():
+    session.pop('client_info', None)  
+    return redirect(url_for('login'))
 
 @app.route("/Confirmed", methods=["POST"])
 def new_client():
@@ -67,6 +75,15 @@ def new_client():
 @app.route("/deposit")
 def deposit_section():
     return render_template("deposit.html")
+
+@app.route("/withdraw")
+def withdraw_section():
+    return render_template("withdraw.html")
+
+@app.route("/transfer")
+def transfer_section():
+    return render_template("transfer.html")
+
 
 @app.route("/Completed", methods=["POST"])
 def manage_money():

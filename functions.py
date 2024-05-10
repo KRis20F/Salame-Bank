@@ -184,3 +184,31 @@ def transfer(client, receiver, password, value):
         print("Error detected:", error)
 
         return False
+    
+def check_transactions(client):
+    info = {}
+    database = connect_database()
+    cursor = database.cursor()
+
+    query = """
+        SELECT date , time , balance FROM transactions
+        WHERE username = %s;
+    """
+    values = (client["username"],)
+    cursor.execute(query, values)
+    
+    account_info = cursor.fetchall()
+    
+    print(account_info)
+
+    info["date"] = account_info[0][0]
+    info["time"] = account_info[0][1]
+    info["balance"] = account_info[0][2]
+    
+    database.commit()
+    database.close()
+    
+    return info
+    
+    
+    

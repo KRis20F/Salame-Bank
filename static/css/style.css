@@ -23,7 +23,7 @@ a {color: inherit; text-decoration: none;}
 
 /* ------------ HEADER -_-------------------------------- */
 
-.container-header{background-color: rgb(254 138 1); padding: 1em; } 
+.container-header{background-color: #f76712; padding: 1em; } 
 
 .container-header > .wrapper {display: flex; justify-content: space-around;}
 
