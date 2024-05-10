@@ -61,7 +61,8 @@ def create_tables():
             new_currency INT,
             date DATE,
             time TIME,
-            balance INT
+            balance INT,
+            type VARCHAR(20)
         );
     """
 
@@ -91,11 +92,23 @@ def create_triggers(cursor):
         AFTER UPDATE ON accounts FOR EACH ROW
         BEGIN
             DECLARE v_balance INT;
+            DECLARE v_type VARCHAR(20);
 
             SET v_balance = NEW.currency - OLD.currency;
 
-            INSERT INTO transactions (username, old_currency, new_currency, date, time, balance)
-            VALUES (NEW.username, OLD.currency, NEW.currency, CURRENT_DATE, CURRENT_TIME, v_balance);
+            IF (SELECT COUNT(*) FROM transactions WHERE date = CURRENT_DATE AND time = CURRENT_TIME) > 0 THEN
+                SET v_type = "transfer";
+                UPDATE transactions 
+                SET type = "transfer" 
+                WHERE date = CURRENT_DATE AND time = CURRENT_TIME;
+            ELSEIF v_balance > 0 THEN
+                SET v_type = "deposit";
+            ELSE
+                SET v_type = "withdraw";
+            END IF;
+
+            INSERT INTO transactions (username, old_currency, new_currency, date, time, balance, type)
+            VALUES (NEW.username, OLD.currency, NEW.currency, CURRENT_DATE, CURRENT_TIME, v_balance, v_type);
         END;
     """
 

@@ -17,6 +17,11 @@ def login():
 def signin():
     return render_template("Signin.html")
 
+@app.route('/logout')
+def logout():
+    session.pop('client_info', None)  
+    return redirect(url_for('login'))
+
 @app.route("/Home", methods=["GET", "POST"])
 def new_connection():
     if request.method == "POST":
@@ -30,26 +35,22 @@ def new_connection():
 
         if isinstance(client, dict):
             session["client_info"] = client
-            data_transations = functions.check_transactions(client)
+            transactions = functions.check_transactions(client)
             
-            return render_template("Home.html", client_info = client, data_transations = data_transations)
+            return render_template("Home.html", client_info = client, transactions_info = transactions)
         else:
             return render_template("Login.html", error_message = client)
         
     elif request.method == "GET":
         if "client_info" in session:
             client_info = session["client_info"]
+
+            transactions = functions.check_transactions(client_info)
             client_info = functions.connect_account(client_info)
             
-            return render_template("Home.html", client_info = client_info)
+            return render_template("Home.html", client_info = client_info, transactions_info = transactions)
         else:
             return render_template("Login.html")
-        
-        
-@app.route('/logout')
-def logout():
-    session.pop('client_info', None)  
-    return redirect(url_for('login'))
 
 @app.route("/Confirmed", methods=["POST"])
 def new_client():
@@ -83,7 +84,6 @@ def withdraw_section():
 @app.route("/transfer")
 def transfer_section():
     return render_template("transfer.html")
-
 
 @app.route("/Completed", methods=["POST"])
 def manage_money():

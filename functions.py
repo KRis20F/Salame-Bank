@@ -67,25 +67,25 @@ def connect_account(client):
 
 def get_account(client, info, cursor):
     query = """
-        SELECT *
+        SELECT username, password, currency, IBAN
         FROM accounts
         WHERE username = %s AND password = %s;
     """
     values = (client["username"], client["password"])
     cursor.execute(query, values)
 
-    account_info = cursor.fetchall()
+    account_info = cursor.fetchone()
 
-    info["username"] = account_info[0][2]
-    info["password"] = account_info[0][3]
-    info["currency"] = account_info[0][4]
-    info["IBAN"] = account_info[0][5]
+    info["username"] = account_info[0]
+    info["password"] = account_info[1]
+    info["currency"] = account_info[2]
+    info["IBAN"] = account_info[3]
 
     return info
 
 def get_client(client, info, cursor):
     query = """
-        SELECT *
+        SELECT name
         FROM clients
         INNER JOIN accounts ON clients.id_client = accounts.id_client
         WHERE accounts.username = %s AND accounts.password = %s;
@@ -93,9 +93,9 @@ def get_client(client, info, cursor):
     values = (client["username"], client["password"])
     cursor.execute(query, values)
 
-    account_info = cursor.fetchall()
+    account_info = cursor.fetchone()
 
-    info["name"] = account_info[0][1]
+    info["name"] = account_info[0]
 
     return info
 
@@ -186,12 +186,12 @@ def transfer(client, receiver, password, value):
         return False
     
 def check_transactions(client):
-    info = {}
     database = connect_database()
     cursor = database.cursor()
 
     query = """
-        SELECT date , time , balance FROM transactions
+        SELECT date , time , balance, type
+        FROM transactions
         WHERE username = %s;
     """
     values = (client["username"],)
@@ -200,15 +200,11 @@ def check_transactions(client):
     account_info = cursor.fetchall()
     
     print(account_info)
-
-    info["date"] = account_info[0][0]
-    info["time"] = account_info[0][1]
-    info["balance"] = account_info[0][2]
     
     database.commit()
     database.close()
     
-    return info
+    return account_info
     
     
     
