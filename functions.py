@@ -67,7 +67,7 @@ def connect_account(client):
 
 def get_account(client, info, cursor):
     query = """
-        SELECT username, password, currency, IBAN
+        SELECT id_client, username, password, currency, IBAN
         FROM accounts
         WHERE username = %s AND password = %s;
     """
@@ -76,10 +76,11 @@ def get_account(client, info, cursor):
 
     account_info = cursor.fetchone()
 
-    info["username"] = account_info[0]
-    info["password"] = account_info[1]
-    info["currency"] = account_info[2]
-    info["IBAN"] = account_info[3]
+    info["id_client"] = account_info[0]
+    info["username"] = account_info[1]
+    info["password"] = account_info[2]
+    info["currency"] = account_info[3]
+    info["IBAN"] = account_info[4]
 
     return info
 
