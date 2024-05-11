@@ -68,18 +68,39 @@
     position: relative;
 }
 
+.ul-info-client{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}    
+
+.img-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .container-about-client {
     position: absolute;
     width: 38%;
     border-radius: 29px;
-    padding: 1em;
+    padding: 3em 1em;
     display: flex;
     flex-direction: column;
     left: 105%;
+    top: -246px;
     align-items: center;
-    top: -196px;
     background-color: #fe5f00;
+    color: #fff;
+}
 
+.btn-infos {
+    margin-block: 10px;
+}
+
+.btn-infos p{
+    text-align: center;
 }
 
 /* END CLIENT */
@@ -142,7 +163,7 @@
 .ul-list-transactions {
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: 31px;
 }
 
 .list-transation-none {
@@ -156,17 +177,20 @@
     display: flex;
     padding: 1em 2em;
     border-radius: 20px;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background: #fe5f00;
     color: #fff;
+    text-shadow: 3px 0px 12px black;
     gap: 27px;
 }
 
 .shoppin-transaction {
     width: 24px;
     border-radius: 50%;
-    background: #9ec2e2;
+    background: #902def;
+    color: #000;
+    text-shadow: 1px 0px 3px white;
     padding: 16px;
     text-align: center;
 }

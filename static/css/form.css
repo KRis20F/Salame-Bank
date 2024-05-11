@@ -1,6 +1,6 @@
 body{
     background: rgb(255,106,0);
-    background: linear-gradient(166deg, rgba(255,106,0,1) 11%, rgba(0,0,0,1) 100%);
+    /* background: linear-gradient(166deg, rgba(255,106,0,1) 11%, rgba(0,0,0,1) 100%); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,6 +79,26 @@ body{
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
+}
+
+
+.form-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.form-left {
+    left: 0;
+    width: 53%;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
 }
 
 .icon {
@@ -168,19 +188,6 @@ body{
     padding: 20px 0;
 }
 
-.form-container{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
-}
-
-.sign-in{
-    left: 0;
-    width: 50%;
-    z-index: 2;
-}
 
 .container.active .sign-up{
     transform: translateX(100%);
@@ -217,10 +224,17 @@ body{
     border-bottom-right-radius: 31%;
 }
 
+.toggle-container-rigth {
+    left: 384px;
+    border-top-left-radius: 29%;
+    border-bottom-left-radius: 31%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .toggle{
-    background-color: #512da8;
+    background-color: #5b23e2;
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
     color: #fff;
     position: relative;
     left: -100%;
@@ -228,6 +242,12 @@ body{
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
+}
+
+.toogle-rigth-principal {
+    transform: translateX(385px);
+    right: 0;
+    
 }
 
 .container.active .toggle{

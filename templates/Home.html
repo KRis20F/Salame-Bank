@@ -90,32 +90,26 @@
                                 <i class="fa-solid fa-angle-right"></i>
                                 <div class="container-about-client">
                                     <div class="img-logo">
+                                        <p>ID del Cliente : #00{{ client_info["id_client"] }}</p>
                                         <i class=" icon-bar-carrusel fa-solid fa-user"></i>
                                     </div>
-                                    <ul>
+                                    <ul class="ul-info-client">
                                         <li class="btn-infos name-complete">
-                                            <ul>
-                                                <li>
-                                                    <p>Nombre : {{ client_info["name"] }}</p>
-                                                </li>
-                                                <li>
-                                                    <p>Apellido : {{ client_info["surname"] }}</p>
-                                                </li>
-                                            </ul>
+                                            
+                                            <p>Nombre y Apellido  <br> <span>{{ client_info["name"] }} {{ client_info["surname"] }}</span> </p>                                                
+                                            
                                         </li>
                                         <li class="btn-infos">
+                                            <p>Edad  <br> <span>{{ client_info["age"] }} años</span></p>
                                         </li>
                                         <li class="btn-infos">
-                                            <p>Edad : {{ client_info["age"] }} años</p>
+                                            <p>Email  <br> <span>{{ client_info["email"] }}</span> </p>
                                         </li>
                                         <li class="btn-infos">
-                                            <p>Email : {{ client_info["email"] }}</p>
+                                            <p>IBAN  <br> <span>{{client_info["IBAN"]}}</span> </p>
                                         </li>
                                         <li class="btn-infos">
-                                            <p>IBAN : {{client_info["IBAN"]}}</p>
-                                        </li>
-                                        <li class="btn-infos">
-                                            <p>Pais de Nacimiento : {{client_info["country"]}} </p>
+                                            <p>Pais de Nacimiento  <br> <span>{{client_info["country"]}}</span>  </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -125,7 +119,7 @@
                         <div class="history-client option-info-client">
                             
                             <div class="btn-view-history">
-                                <h2 class="h2-history">Transacciones</h2>
+                                <h2 class="h2-history">Movimientos</h2>
                                 <ul class="ul-list-transactions">
                                     
                                     

@@ -51,13 +51,25 @@ margin-top: 50px;
 }
 
 .center{
-    top: 107px;
+    top: 149px;
     left: 90px;
+}
+
+.origin {
+    top: 103px;
+}
+
+.middle-transfer {
+    top: 150px;
 }
 
 .top-left{
     top: 174px;
     left: 89px;
+}
+
+.bottom-tranfer{
+    top: 216px;
 }
 
 .form-all .form-li label {
@@ -83,6 +95,16 @@ margin-top: 50px;
 .container-form-money .form-li .input-top-left2:valid ~ label {
     top: 155px;
     left: 77px;
+}
+
+.container-form-money .form-li .input-transfer-money:focus ~ label,
+.container-form-money .form-li .input-transfer-money:valid ~ label {
+    top: 133px;
+}
+
+.container-form-money .form-li .input-transfer:focus ~ label,
+.container-form-money .form-li .input-transfer:valid ~ label {
+    top: 197px;
 }
 
 .float {
