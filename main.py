@@ -95,17 +95,23 @@ def manage_money():
     
     if action == "deposit":
         is_completed = functions.deposit(session["client_info"], password, money)
+
+        if not is_completed:
+            return render_template("deposit.html", error_message = "Datos incorrectos, intentalo de nuevo")
         
     elif action == "withdraw":
         is_completed = functions.withdraw(session["client_info"], password, money)
+
+        if not is_completed:
+            return render_template("withdraw.html", error_message = "Datos incorrectos, intentalo de nuevo")
     
     elif action == "transfer":
         receiver = form_data["receiver"]
         is_completed = functions.transfer(session["client_info"], receiver, password, money)
 
-    if is_completed:
-        return render_template("Completed.html")
-    else:
-        return render_template("deposit.html", error_message = "Datos incorrectos, intentalo de nuevo")
+        if not is_completed:
+            return render_template("transfer.html", error_message = "Datos incorrectos, intentalo de nuevo")
+
+    return render_template("Completed.html")
 
 app.run(host='localhost', port=5069, debug=True)

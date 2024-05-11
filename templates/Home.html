@@ -86,8 +86,6 @@
 
                         <div class="info-client">
                             <div class="details-about">
-                                <p>Mostrar informacion </p>
-                                <i class="fa-solid fa-angle-right"></i>
                                 <div class="container-about-client">
                                     <div class="img-logo">
                                         <p>ID del Cliente : #00{{ client_info["id_client"] }}</p>
@@ -139,6 +137,9 @@
                                                 <i class="fa-solid fa-share shoppin-transaction"></i>
                                             
                                             {% endif %}
+                                            <div>
+                                                <p>{{transaction[3]}}</p>
+                                            </div>
                                             <ul class="info-transation">
                                                 <li>Fecha: {{ transaction[0] }}</li>
                                                 <li>Hora: {{ transaction[1] }}</li>
@@ -146,9 +147,7 @@
                                             <div>
                                                 <p>{{ transaction[2] }}</p>
                                             </div>
-                                            <div>
-                                                <p>{{transaction[3]}}</p>
-                                            </div>
+                                            
                                             
                                             {% endfor %}
                                         </li>
@@ -158,7 +157,7 @@
                                 
                                 <li class="list-transation-none">
                                     <img src="../static/img/mony-removebg-preview.png" alt="no hay nada mony salame bank">
-                                    No haz hecho alguna transaccion por ahora.
+                                    No has hecho alguna transaccion por ahora.
                                 </li>
                                 
                                 {% endif %}                                    

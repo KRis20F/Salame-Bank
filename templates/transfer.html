@@ -26,17 +26,17 @@
         <main class="form-all">
             <section class="container-form-money">
                 <form action="/Completed" method="post" class="form-money">
-                    
-                    <input type="hidden" name="action" value="transfer">
+                    <p style="color: red;">{{error_message}}</p>
 
+                    <input type="hidden" name="action" value="transfer">
                     <ul>
                         <li class="form-li">
                             <input type="text" name="receiver" id="receiver" required>
-                            <label class="origin" for="money">Usuario a depositar</label>
+                            <label class="origin" for="money">Usuario a enviar</label>
                         </li>
                         <li class="form-li">
                             <input type="number" class="input-transfer-money" name="money" id="money" required>
-                            <label class="center middle-transfer" for="money">Dinero a depositar</label>
+                            <label class="center middle-transfer" for="money">Dinero a enviar</label>
                         </li>
                         <li class="form-li label-top">
                             <input class="input-top-left2 input-transfer" type="password" name="password" id="password" required>

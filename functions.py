@@ -36,7 +36,7 @@ def register_client(client):
 
 def register_account(cursor, client, id_client):
     query = "INSERT INTO accounts (id_client, username, password, currency, IBAN) VALUES (%s, %s, %s, %s, %s)"
-    values = (id_client, client["username"], client["password"], 69000 , create_IBAN())
+    values = (id_client, client["username"] ,client["password"] ,0 ,create_IBAN())
     cursor.execute(query, values)
 
     print("cuenta registrada")
@@ -166,17 +166,25 @@ def withdraw(client, password, value):
 
 def transfer(client, receiver, password, value):
     try:
-        withdraw(client, password, value)
         database = connect_database()
         cursor = database.cursor()
 
-        query = """
+        withdraw_query = """
+            UPDATE accounts
+            SET currency = currency - %s
+            WHERE username = %s AND password = %s;
+        """
+        deposit_query = """
             UPDATE accounts
             SET currency = currency + %s
             WHERE username = %s;
         """
+
+        values = (value, client["username"], password)
+        cursor.execute(withdraw_query, values)
+
         values = (value, receiver)
-        cursor.execute(query, values)
+        cursor.execute(deposit_query, values)
 
         print("dinero enviado")
 
