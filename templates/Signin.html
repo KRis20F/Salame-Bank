@@ -13,13 +13,13 @@
 </head>
 <body data-barba="wrapper">
     <div data-barba="container" data-barba-namespace="home">
-        <div class="container" id="container">
+        <div class="container heigth-all" id="container">
             <div class="toggle-container">
                 <div class="toggle">
                     <div class="toggle-panel toggle-left">
-                        <h1>Welcome Back!</h1>
-                        <p>Enter your personal details to use all of site features</p>
-                        <button class="hidden" id="login">Sign In</button>
+                        <h1>Welcome!</h1>
+                        <p>Ya tienes cuenta?? Entonces inicia sesion</p>
+                        <a href="Login" class="btn-signin btns-form" id="login">Sign In</a>
                     </div>
                 </div>
             </div>
@@ -33,17 +33,17 @@
                         <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
                     <span>For use your email for registeration</span>
-                    <input type="text"name="name" id="name"  placeholder="Tu nombre">
-                    <input type="text" name="surname" id="surname" placeholder="Tu apellido">
-                    <input type="number" name="age" id="age" placeholder="Tu edad">
-                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="text"  pattern="^[A-Z][a-zA-Z]*$"  name="name" id="name"  placeholder="Tu nombre" required>
+                    <input type="text" pattern="^[A-Z][a-zA-Z]*$" name="surname" id="surname" placeholder="Tu apellido" required>
+                    <input type="number" name="age" id="age" placeholder="Tu edad" required>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
                     <input type="text" name="country" id="country" placeholder="Elige tu pais">
 
                     <span>Ingresa tu nuevo usuario</span>
-                    <input type="text" name="username" id="username" placeholder="Username">
-                    <input type="password" name="password" id="password" placeholder="Password">
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="password" pattern="^[A-Z][0-9]+[,.|@#~~]$" name="password" id="password" placeholder="Password" required>
     
-                    <button type="submit">Sign Up</button>
+                    <button class="btns-form" type="submit">Registrarse</button>
                 </form>
             </div>
             

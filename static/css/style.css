@@ -23,6 +23,7 @@ a {color: inherit; text-decoration: none;}
 
 /* ------------ HEADER -_-------------------------------- */
 
+
 .container-header{background-color: #f76712; padding: 1em; } 
 
 .container-header > .wrapper {display: flex; justify-content: space-around;}
@@ -47,6 +48,10 @@ a {color: inherit; text-decoration: none;}
 
 /* Menu Desplegable */
 
+.container-bar-main {
+  
+}
+
 .navigation-header {
   opacity: 0;
   visibility: hidden;
@@ -58,7 +63,8 @@ a {color: inherit; text-decoration: none;}
   position: fixed;
   z-index: 12;
   top: 11%;
-  
+  background: rgb(193,59,255);
+  background: linear-gradient(166deg, rgba(193,59,255,1) 0%, rgba(34,47,145,1) 100%);
 }
 
 .navigation-header.visible {
@@ -79,6 +85,13 @@ a {color: inherit; text-decoration: none;}
   border: none;
   cursor: pointer;
   width: 60px;
+}
+
+.close-main {
+  position: absolute;
+  right: 0;
+  font-size: 2.4em;
+
 }
 
 /*--------------------- Buttom header ----------------------- */
@@ -153,9 +166,8 @@ a {color: inherit; text-decoration: none;}
 
 .links-bars a{
   display: inline-block;
-  background-color: #3d40da;
-  width: 100%;
   padding: 1em;
+  margin-block: 1em;
 }
 
 .bars-carrusel {
@@ -163,19 +175,35 @@ a {color: inherit; text-decoration: none;}
   overflow: hidden;
 }
 
-.header_nav_bars {}
+.title-products {
+  font-size: 2em;
+  margin: 41px 0 0 16px;
+  color: #fff;
+}
 
-.bar-top {margin: 0 1em 2em; }
 
-.title-bar-nav{  font-size: 25px; text-align: center; }
+.bar-top { margin: 0 0 0 5em;; }
+
+.title-bar-nav{
+    margin-bottom: 26px;
+    font-size: 2.6em; 
+    text-align: center; 
+    color: #fff;
+    text-shadow: 5px 1px black;
+  }
+
 
 .languaje-top {justify-content: center; margin-left: -1.8em; margin-bottom: 45px;}
 
 .min-carrusel {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
   gap: 30px;
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 5em;
 }
 
 .icon-bar-carrusel {
@@ -185,13 +213,15 @@ a {color: inherit; text-decoration: none;}
 }
 
 .min-bank-carrusel {
-  background-color: #2c2eb7;
+  background-color: #121477;
   display: flex;
   color: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 33px;
   padding: 1em 2em;
+  box-shadow: #000 5px 3px 14px 0px;
 }
 
 .txt-bars {width: 113px;}
@@ -254,6 +284,14 @@ a {color: inherit; text-decoration: none;}
   right: 32px;
 }
 
+.container-text-carrusel-info {
+  color: #fff;
+  text-shadow: 5px 3px 9px black;
+}
+
+
+/* BUTTOMS END */
+
 .carrusel-bank {
   display: flex;
   flex-direction: column;
@@ -273,6 +311,47 @@ a {color: inherit; text-decoration: none;}
   position: absolute;
   top: 180px;
   left: 194px;
+  margin-top: -2em;
+}
+
+.btn-links-carrusel{
+  float: right;
+  background: #f76712;
+  padding: 1em;
+  border-radius: 45px;
+  margin-top: 15px;
+  position: relative;
+  color: #fff;
+  z-index: 1;
+}
+
+.btn-links-carrusel::before {
+  content: "";
+  border-radius: 45px;
+  display: inline-block;
+  width: 100%;
+  height: 53px;
+  
+  position: absolute;
+  top: 0px;
+  left: 0;
+  z-index: -1;
+}
+
+.btn-links-carrusel:hover::before {
+  background-color: #f5762a;
+  animation: move 1.3s forwards;
+}
+
+
+@keyframes move {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* FINAL DEL CARRUSEL */
@@ -301,18 +380,69 @@ a {color: inherit; text-decoration: none;}
   width: 100px;
 }
 
+.footer {
+  background: rgb(255,106,0);
+background: linear-gradient(166deg, rgba(255,106,0,1) 11%, rgba(0,0,0,1) 100%);
+  color: #fff;
+}
+
 .footer-content {
   display: grid;
+  grid-template-columns: repeat(4 , 1fr);
+  border-bottom: 3px solid #000;
+}
+
+.footer-log {
+  padding: 1em 0;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+}
+
+.container-p-footer-logan{
+  margin-top: 2em;
+}
+
+.container-p-footer-logan p:nth-child(2) {
+  font-size: .7em;
+  margin-left: -105px;
+  margin-top: 33px;
+}
+
+.footer-bottom-content{
+  display: flex;
+  justify-content: space-around;
+  padding: 2em;
+  font-size: 1.3em;
+}
+
+@media (width < 750) {
+  .header-bottom {
+    display: inline-block;
+  }
 }
 
 
 /*---------------------------------  MODO PC ESTA ABAJO ------------------7- */
 
 @media (width > 750px) {
+  .off-pc {
+    display: none;
+  }
+
+  .main-bar-aside {
+    margin-top: 5em;
+  }
 
   .container-bar-main {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .options-products {
+    width: 40%;
+    background-color: #2c2eb7;
   }
 
   .navigation-header {top: 105px;}
@@ -333,8 +463,9 @@ a {color: inherit; text-decoration: none;}
 
   .h2-carrusel {
     font-size: 3em;
-    color: #fff;
+    
   }
+
 
   .image-carrusel {
     position: relative;

@@ -16,7 +16,7 @@
     <header id="header-all-container">
         <div class="container-header">
             <div class="wrapper header-wrapper">
-                <a href="index">
+                <a href="Home">
                     <div class="title-header">
                     <img src="../static/img/logo_Bank-removebg-preview.png" style="width: 69px;" alt="salame bank logo">
                         <h1 class="title_bank_principal">Salame Bank</h1>
@@ -36,7 +36,7 @@
         
                 <nav class="navigation-header" id="nav-header">
                     <button id="close-bar" class="close-main"><i class="fa-solid fa-xmark"></i></button>
-                    <div class="header-bottom">
+                    <div class="header-bottom off-pc">
                         <ul class="Buttoms-Signin_Login">
                             <li><a class="btn-buttom-bar registrer-btn" href="Login">Iniciar Sesion</a></li>
                             <li><a class="btn-buttom-bar login-btn" href="Signin">Registrarse</a></li>
@@ -44,12 +44,15 @@
                     </div>
 
                     <div class="div container-bar-main">
-                        <ul class="list-options">
-                            <li class="links-bars"><a href="#">Cuentas</a></li>
-                            <li class="links-bars"><a href="#">Seguros</a></li>
-                            <li class="links-bars"><a href="#">Hipotecas</a></li>
-                            <li class="links-bars"><a href="#">Depositos</a></li>
-                        </ul>
+                        <div class="options-products">
+                            <h2 class="title-products">Productos</h2>
+                            <ul class="list-options">
+                                <li class="links-bars"><a href="#">Cuentas</a></li>
+                                <li class="links-bars"><a href="#">Seguros</a></li>
+                                <li class="links-bars"><a href="#">Hipotecas</a></li>
+                                <li class="links-bars"><a href="#">Depositos</a></li>
+                            </ul>
+                        </div>
     
                             <!-- OPCION DE MENU EXTENSO  -->
                         <div class="header_nav_bars">
@@ -62,18 +65,7 @@
                                             <section class="bar-top">
                                                 <h1 class="title-bar-nav">Experiencias</h1>
                                                 <div class="wrapper bars-carrusel">
-                                                    <button class="carrusel-arrow carrusel-prev" id="button-prev">
-                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
-                                                            class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 320 512">
-                                                            <path fill="currentColor"
-                                                                d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-                                                            </path>
-                                                        </svg>
-                                                    </button>
                                                     <div class="min-carrusel">
-                                                       
-                                                         <!-- CARRUSEL -->
                                                         <div class="min-bank-carrusel">
                                                             <div class="icon-bars">
                                                                 <i class=" icon-bar-carrusel fa-solid fa-user"></i>
@@ -106,6 +98,39 @@
                                                                 <p>Lorem ipsum dolor sit amet consectetur</p>
                                                             </div>
                                                         </div>
+                                                        <div class="min-bank-carrusel">
+                                                            <div class="icon-bars">
+                                                                <i class=" icon-bar-carrusel fa-solid fa-user"></i>
+                                                            </div>
+                                                            <div class="txt-bars">
+                                                                <p>Lorem ipsum dolor sit amet consectetur</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="min-bank-carrusel">
+                                                            <div class="icon-bars">
+                                                                <i class=" icon-bar-carrusel fa-solid fa-user"></i>
+                                                            </div>
+                                                            <div class="txt-bars">
+                                                                <p>Lorem ipsum dolor sit amet consectetur</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="min-bank-carrusel">
+                                                            <div class="icon-bars">
+                                                                <i class=" icon-bar-carrusel fa-solid fa-user"></i>
+                                                            </div>
+                                                            <div class="txt-bars">
+                                                                <p>Lorem ipsum dolor sit amet consectetur</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="min-bank-carrusel">
+                                                            <div class="icon-bars">
+                                                                <i class=" icon-bar-carrusel fa-solid fa-user"></i>
+                                                            </div>
+                                                            <div class="txt-bars">
+                                                                <p>Lorem ipsum dolor sit amet consectetur</p>
+                                                            </div>
+                                                        </div>
+                                                        
                                                     </div> 
                                                 </div>
                                             </section>
@@ -121,20 +146,6 @@
                         </div>
                         
                     </div>
-                    
-
-                    <ul class="choose-languajes languaje-top">
-                        <!-- BOTONES DE IDIOMAs -->
-                        <li><a href="">EN</a></li>
-                        <li><a href="">ES</a></li>
-                        <li><a href="">CAT</a></li>
-                    </ul>
-
-
-                    <!-- MODO OSCURO -->
-                    <a href=""><i class="fa-solid fa-moon"></i></a>
-
-
                 </nav>
             </div>
         </div>
@@ -155,8 +166,11 @@
             <div class="carrusel-bank">
                 <div class="about-bank-carrusel">
                     <div class="container-text carrusel-text">
-                        <h2 class="title-carrusel h2-carrusel">El Banco que siempre vela por ti</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut</p>
+                        <div class="container-text-carrusel-info">
+                            <h2 class="title-carrusel h2-carrusel">El Banco que siempre vela por ti</h2>
+                            <p>Descubre la comodidad y seguridad de unirte a Salame Bank. Regístrate ahora para acceder a una amplia gama de servicios financieros y comienza a construir un futuro sólido y próspero con nosotros</p>
+                        </div>
+                        <a class="btn-links-carrusel" href="Signin">Registrate Gratis!!</a>
                     </div>
                 </div>
                 <div class="image-carrusel">
@@ -172,28 +186,28 @@
                         alt="">
                     </picture>
                 </div>
-                
             </div>
             <div class="carrusel-bank">
                 <div class="about-bank-carrusel">
                     <div class="container-text carrusel-text">
-                        <h2 class="title-carrusel h2-carrusel">El Banco que siempre vela por ti</h2>
+                        <h2 class="title-carrusel h2-carrusel">Avanza con Confianza: de Soluciones y Financieras</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae fugit animi in quos quia aut</p>
                     </div>
                 </div>
                 <div class="image-carrusel">
                     <picture class="img-carrusel">
                         <img
-                        sizes="(max-width: 1100px) 100vw, 1100px"
-                        srcset="
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_200.jpg 200w,
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_641.jpg 641w,
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_941.jpg 941w,
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1126.jpg 1126w,
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1323.jpg 1323w,
-                        ../static/img/images-responsives/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg 1400w"
-                        src="../static/img/brooke-cagle-tLG2hcpITZE-unsplash_l5pjmd_c_scale,w_1400.jpg"
-                        alt="">
+                            sizes="(max-width: 1100px) 100vw, 1100px"
+                            srcset="
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg,
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg,
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg,
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg,
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg,
+                            ../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg"
+                            src="../static/img/images-responsives/img3/img3_sdmrqt_c_scale,w_1400.jpg"
+                            alt="carrusel salame bank"
+                        />    
                     </picture>
                 </div>
                 
@@ -271,6 +285,20 @@
             <div class="footer-content">
                 <div class="footer-log">
                     <img class="background-img-footer" src="../static/img/logo_Bank-removebg-preview.png" alt="logo bank sin fondo">
+                    <div class="container-p-footer-logan">
+                        <p>Salame Bank </p>
+                    <p>Donde cada centavo cuenta.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-bottom-content-left">
+                        <p>© Salame Bank 2024</p>
+                    </div>
+                    <div class="footer-bottom-content-rigth">
+                        <p>Hecho por Cristian y Alvaro</p>
+                    </div>
                 </div>
             </div>
         </div>

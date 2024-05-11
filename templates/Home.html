@@ -14,7 +14,7 @@
         <header id="header-all-container">
             <div class="container-header">
                 <div class="wrapper header-wrapper">
-                    <a href="index">
+                    <a href="Home">
                         <div class="title-header">
                         <img src="../static/img/logo_Bank-removebg-preview.png" style="width: 69px;" alt="salame bank logo">
                             <h1 class="title_bank_principal">Salame Bank</h1>
@@ -23,7 +23,7 @@
     
                     <a href="{{ url_for('logout')}} " class="btn-logout"><i class="fa-solid fa-power-off"></i> Cerrar Sesion</a>
 
-                    <button id="open-bar" class="open-main"><i class="fa-solid fa-bars bar-menu"></i></button>
+                    <!-- <button id="open-bar" class="open-main"><i class="fa-solid fa-bars bar-menu"></i></button>
             
 
                     <nav class="navigation-header" id="nav-header">
@@ -42,7 +42,7 @@
                                 <a href="" class="btn-options">#</a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> -->
                 </div>
             </div>
         </header>
@@ -84,34 +84,91 @@
                            
                         </div>
 
-                        <div class="info-iban">
+                        <div class="info-client">
                             <div class="details-about">
                                 <p>Mostrar informacion </p>
                                 <i class="fa-solid fa-angle-right"></i>
+                                <div class="container-about-client">
+                                    <div class="img-logo">
+                                        <i class=" icon-bar-carrusel fa-solid fa-user"></i>
+                                    </div>
+                                    <ul>
+                                        <li class="btn-infos name-complete">
+                                            <ul>
+                                                <li>
+                                                    <p>Nombre : {{ client_info["name"] }}</p>
+                                                </li>
+                                                <li>
+                                                    <p>Apellido : {{ client_info["surname"] }}</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="btn-infos">
+                                        </li>
+                                        <li class="btn-infos">
+                                            <p>Edad : {{ client_info["age"] }} años</p>
+                                        </li>
+                                        <li class="btn-infos">
+                                            <p>Email : {{ client_info["email"] }}</p>
+                                        </li>
+                                        <li class="btn-infos">
+                                            <p>IBAN : {{client_info["IBAN"]}}</p>
+                                        </li>
+                                        <li class="btn-infos">
+                                            <p>Pais de Nacimiento : {{client_info["country"]}} </p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <!-- <p>IBAN : {{client_info["IBAN"]}}</p> -->
                         </div> 
 
                         <div class="history-client option-info-client">
                             
                             <div class="btn-view-history">
                                 <h2 class="h2-history">Transacciones</h2>
-                                {% if transactions_info %}
-                                    <ul class="ul-list-transactions">
+                                <ul class="ul-list-transactions">
+                                    
+                                    
+                                    {% if transactions_info %}
+                                    <li>
+                                        {% for transaction in transactions_info %}
                                         <li class="container-about">
-                                            <i class="fa-solid fa-cart-shopping shoppin-transaction"></i>
+
+                                    
+                                            {% if transaction[3] == "deposit"%}
+                                                <i class="fa-solid fa-cart-shopping shoppin-transaction"></i>
+
+                                            {% elif transaction[3] == "withdraw"%}
+                                                <i class="fa-solid fa-bomb shoppin-transaction"></i>    
+                                            
+                                            {% else %}
+                                                <i class="fa-solid fa-share shoppin-transaction"></i>
+                                            
+                                            {% endif %}
                                             <ul class="info-transation">
-                                                <li>Fecha: {{ transactions_info[0][0] }}</li>
-                                                <li>Hora: {{ transactions_info[0][1] }}</li>
+                                                <li>Fecha: {{ transaction[0] }}</li>
+                                                <li>Hora: {{ transaction[1] }}</li>
                                             </ul>
                                             <div>
-                                                <i class="fa-solid fa-plus"></i> {{ transactions_info[0][2] }}
+                                                <p>{{ transaction[2] }}</p>
                                             </div>
+                                            <div>
+                                                <p>{{transaction[3]}}</p>
+                                            </div>
+                                            
+                                            {% endfor %}
                                         </li>
-                                    </ul>
+                                    </li>
+                                
                                 {% else %}
-                                    <h2>no hicistes nada brodi</h2>
-                                {% endif %}
+                                
+                                <li class="list-transation-none">
+                                    <img src="../static/img/mony-removebg-preview.png" alt="no hay nada mony salame bank">
+                                    No haz hecho alguna transaccion por ahora.
+                                </li>
+                                
+                                {% endif %}                                    
+                                </ul>
                             </div>                          
                         </div>
                     </div>

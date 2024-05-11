@@ -85,7 +85,7 @@ def get_account(client, info, cursor):
 
 def get_client(client, info, cursor):
     query = """
-        SELECT name
+        SELECT name , surname, age, country, email
         FROM clients
         INNER JOIN accounts ON clients.id_client = accounts.id_client
         WHERE accounts.username = %s AND accounts.password = %s;
@@ -96,6 +96,10 @@ def get_client(client, info, cursor):
     account_info = cursor.fetchone()
 
     info["name"] = account_info[0]
+    info["surname"] = account_info[1]
+    info["age"] = account_info[2]
+    info["country"] = account_info[3]
+    info["email"] = account_info[4]
 
     return info
 
