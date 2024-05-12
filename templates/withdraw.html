@@ -26,13 +26,15 @@
          <main class="form-all">
             <section class="container-form-money">
                 <form action="/Completed" method="post" class="form-money">
+
+                    <p style="color: red; position: absolute;top: 45px;left: 84px;">{{error_message}}</p>
                     
                     <input type="hidden" name="action" value="withdraw">
     
                     <ul>
                         <li class="form-li">
                             <input type="number" name="money" id="money" required>
-                            <label class="center" for="money">Dinero a Retirar</label>
+                            <label class="center top-" for="money">Dinero a Retirar</label>
                         </li>
                         <li class="form-li label-top">
                             <input class="input-top-left2" type="password" name="password" id="password" required>

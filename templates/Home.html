@@ -23,26 +23,6 @@
     
                     <a href="{{ url_for('logout')}} " class="btn-logout"><i class="fa-solid fa-power-off"></i> Cerrar Sesion</a>
 
-                    <!-- <button id="open-bar" class="open-main"><i class="fa-solid fa-bars bar-menu"></i></button>
-            
-
-                    <nav class="navigation-header" id="nav-header">
-                        <button id="close-bar" class="close-main"><i class="fa-solid fa-xmark"></i></button>
-                        <ul class="container-options">
-                            <li class="ul-option-home">
-                                <a href="" class="btn-options">#</a>
-                            </li>
-                            <li class="ul-option-home">
-                                <a href="" class="btn-options">#</a>
-                            </li>
-                            <li class="ul-option-home">
-                                <a href="" class="btn-options">#</a>
-                            </li>
-                            <li class="ul-option-home">
-                                <a href="" class="btn-options">#</a>
-                            </li>
-                        </ul>
-                    </nav> -->
                 </div>
             </div>
         </header>
@@ -86,8 +66,6 @@
 
                         <div class="info-client">
                             <div class="details-about">
-                                <p>Mostrar informacion </p>
-                                <i class="fa-solid fa-angle-right"></i>
                                 <div class="container-about-client">
                                     <div class="img-logo">
                                         <p>ID del Cliente : #00{{ client_info["id_client"] }}</p>
@@ -139,6 +117,10 @@
                                                 <i class="fa-solid fa-share shoppin-transaction"></i>
                                             
                                             {% endif %}
+
+                                            <div>
+                                                <p>{{transaction[3]}}</p>
+                                            </div>
                                             <ul class="info-transation">
                                                 <li>Fecha: {{ transaction[0] }}</li>
                                                 <li>Hora: {{ transaction[1] }}</li>
@@ -146,9 +128,7 @@
                                             <div>
                                                 <p>{{ transaction[2] }}</p>
                                             </div>
-                                            <div>
-                                                <p>{{transaction[3]}}</p>
-                                            </div>
+                                            
                                             
                                             {% endfor %}
                                         </li>

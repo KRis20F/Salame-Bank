@@ -140,7 +140,7 @@ def check_transactions(client): # Busca en la tabla transactions las operaciones
 
 def deposit(client, password, value): # Gestiona la funcion de depositar dinero
     try:
-        if value > 0:
+        if int(value) > 0 and password == client["password"]:
             database = connect_database()
             cursor = database.cursor()
 
@@ -169,7 +169,7 @@ def deposit(client, password, value): # Gestiona la funcion de depositar dinero
 
 def withdraw(client, password, value): # Gestiona la funcion de retirar dinero
     try:
-        if value > 0:
+        if int(value) > 0 and password == client["password"]:
             database = connect_database()
             cursor = database.cursor()
 
@@ -193,45 +193,61 @@ def withdraw(client, password, value): # Gestiona la funcion de retirar dinero
     
     except Exception as error:
         print("Error detected:", error)
-
+        
         return False
 
 def transfer(client, receiver, password, value): # Gestiona la funcion de enviar dinero
     try:
-        if value > 0 and client["username"] != receiver:
+        if int(value) > 0 and password == client["password"] and client["username"] != receiver:
             database = connect_database()
             cursor = database.cursor()
 
-            withdraw_query = """
-                UPDATE accounts
-                SET currency = currency - %s
-                WHERE username = %s AND password = %s;
-            """
-            deposit_query = """
-                UPDATE accounts
-                SET currency = currency + %s
-                WHERE username = %s;
-            """
+            is_active = check_user(cursor, receiver)
 
-            values = (value, client["username"], password)
-            cursor.execute(withdraw_query, values)
+            if is_active:
+                withdraw_query = """
+                    UPDATE accounts
+                    SET currency = currency - %s
+                    WHERE username = %s AND password = %s;
+                """
+                deposit_query = """
+                    UPDATE accounts
+                    SET currency = currency + %s
+                    WHERE username = %s;
+                """
 
-            values = (value, receiver)
-            cursor.execute(deposit_query, values)
+                values = (value, client["username"], password)
+                cursor.execute(withdraw_query, values)
 
-            print("dinero enviado")
+                values = (value, receiver)
+                cursor.execute(deposit_query, values)
 
-            database.commit()
-            database.close()
+                print("dinero enviado")
 
-            return True
-        else:
-            return False
+                database.commit()
+                database.close()
+
+                return True
+        
+        return False
     
     except Exception as error:
         print("Error detected:", error)
 
         return False
     
-    
-    
+def check_user(cursor, username):
+    query = """
+        SELECT *
+        FROM accounts
+        WHERE username = %s;
+    """
+    values = (username,)
+    cursor.execute(query, values)
+
+    client = cursor.fetchone()
+
+    if not client:
+        return False
+    else:
+        return True

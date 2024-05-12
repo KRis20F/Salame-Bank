@@ -20,7 +20,7 @@ def signin():
 @app.route('/logout')
 def logout():
     session.pop('client_info', None)  
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route("/Home", methods=["GET", "POST"]) # Menu principal del usuario para realizar las operaciones
 def new_connection():
