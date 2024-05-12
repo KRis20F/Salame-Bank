@@ -1,22 +1,22 @@
 import mysql.connector, functions
 
-def connect_mysql():
+def connect_mysql(): # Conexion al mysql
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password=""
+        host = "localhost",
+        user = "root",
+        password = ""
     )
     return conn
 
-def create_database():
+def create_database(): # Genera la base de datos si no existe
     try:
         database = connect_mysql()
         cursor = database.cursor()
 
-        # cursor.execute("DROP DATABASE IF EXISTS salame_bank;")
         cursor.execute("SHOW DATABASES LIKE 'salame_bank'")
-        exists = cursor.fetchone()
-        if not exists:
+        is_created = cursor.fetchone()
+
+        if not is_created:
             cursor.execute("CREATE DATABASE salame_bank;")
             create_tables()
 
@@ -26,7 +26,7 @@ def create_database():
     except Exception as error:
         print("Error detected:", error)
 
-def create_tables():
+def create_tables(): # Genera las tablas de la base de datos
     database = functions.connect_database()
     cursor = database.cursor()
 
@@ -75,8 +75,8 @@ def create_tables():
     database.commit()
     database.close()
 
-def create_triggers(cursor):
-    check_trigger = """
+def create_triggers(cursor): # Genera los triggers de la base de datos
+    check_trigger = """ 
         CREATE TRIGGER check_transaction 
         BEFORE UPDATE ON accounts FOR EACH ROW
         BEGIN
@@ -112,5 +112,5 @@ def create_triggers(cursor):
         END;
     """
 
-    cursor.execute(check_trigger)
-    cursor.execute(register_trigger)
+    cursor.execute(check_trigger) # Se encarga de que tu cuenta no pueda tener numeros negativos
+    cursor.execute(register_trigger) # Se encarga de guardar el registro de todas las operaciones realizadas

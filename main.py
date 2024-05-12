@@ -22,18 +22,18 @@ def logout():
     session.pop('client_info', None)  
     return redirect(url_for('login'))
 
-@app.route("/Home", methods=["GET", "POST"])
+@app.route("/Home", methods=["GET", "POST"]) # Menu principal del usuario para realizar las operaciones
 def new_connection():
-    if request.method == "POST":
+    if request.method == "POST": # Si estas iniciando sesion:
         client = {}
 
-        form_data = request.form
-        client["username"] = form_data["username"]
-        client["password"] = form_data["password"]
+        data = request.form
+        client["username"] = data["username"]
+        client["password"] = data["password"]
 
         client = functions.connect_account(client)
 
-        if isinstance(client, dict):
+        if isinstance(client, dict): # Si "client" es un diccionario, contiene los datos del usuario
             session["client_info"] = client
             transactions = functions.check_transactions(client)
             
@@ -42,29 +42,30 @@ def new_connection():
             return render_template("Login.html", error_message = client)
         
     elif request.method == "GET":
-        if "client_info" in session:
+        if "client_info" in session: # Si ya tienes una sesion iniciada:
             client_info = session["client_info"]
 
+            # Refresca los nuevos datos tras las operaciones realizadas
             transactions = functions.check_transactions(client_info)
             client_info = functions.connect_account(client_info)
             
             return render_template("Home.html", client_info = client_info, transactions_info = transactions)
         else:
-            return render_template("Login.html")
+            return render_template("Login.html", error_message = "Error de conexion, vuelve a iniciar sesion")
 
-@app.route("/Confirmed", methods=["POST"])
+@app.route("/Confirmed", methods=["POST"]) # Envio de informacion del usuario a la base de datos
 def new_client():
     client = {}
 
-    form_data = request.form
-    client["name"] = form_data["name"]
-    client["surname"] = form_data["surname"]
-    client["age"] = form_data["age"]
-    client["country"] = form_data["country"]
-    client["email"] = form_data["email"]
+    data = request.form
+    client["name"] = data["name"]
+    client["surname"] = data["surname"]
+    client["age"] = data["age"]
+    client["country"] = data["country"]
+    client["email"] = data["email"]
     
-    client["username"] = form_data["username"]
-    client["password"] = form_data["password"]
+    client["username"] = data["username"]
+    client["password"] = data["password"]
     
     is_created = functions.register_client(client)
 
@@ -85,13 +86,13 @@ def withdraw_section():
 def transfer_section():
     return render_template("transfer.html")
 
-@app.route("/Completed", methods=["POST"])
+@app.route("/Completed", methods=["POST"]) # Envio de la operacion del usuario a la base de datos
 def manage_money():
-    form_data = request.form
+    data = request.form
 
-    action = form_data["action"]
-    password = form_data["password"]
-    money = form_data["money"]
+    action = data["action"]
+    password = data["password"]
+    money = data["money"]
     
     if action == "deposit":
         is_completed = functions.deposit(session["client_info"], password, money)
@@ -106,7 +107,7 @@ def manage_money():
             return render_template("withdraw.html", error_message = "Datos incorrectos, intentalo de nuevo")
     
     elif action == "transfer":
-        receiver = form_data["receiver"]
+        receiver = data["receiver"]
         is_completed = functions.transfer(session["client_info"], receiver, password, money)
 
         if not is_completed:

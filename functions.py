@@ -1,6 +1,6 @@
 import mysql.connector, random , string
 
-def connect_database():
+def connect_database(): # Conexion a la base de datos
     conn = mysql.connector.connect(
         host = "localhost",
         user = "root",
@@ -9,7 +9,7 @@ def connect_database():
     )
     return conn
 
-def register_client(client):
+def register_client(client): # Guarda los datos del usuario a la base de datos
     try:
         database = connect_database()
         cursor = database.cursor()
@@ -34,14 +34,14 @@ def register_client(client):
         
         return False
 
-def register_account(cursor, client, id_client):
+def register_account(cursor, client, id_client): # Guarda los datos de la cuenta del usuario a la base de datos
     query = "INSERT INTO accounts (id_client, username, password, currency, IBAN) VALUES (%s, %s, %s, %s, %s)"
     values = (id_client, client["username"] ,client["password"] ,0 ,create_IBAN())
     cursor.execute(query, values)
 
     print("cuenta registrada")
 
-def connect_account(client):
+def connect_account(client): # Devuelve datos del usuario
     client_info = {}
 
     try:
@@ -54,8 +54,8 @@ def connect_account(client):
         database.commit()
         database.close()
     
-    except IndexError as index_error:
-        print("Índice fuera de límites:", index_error)
+    except TypeError as error:
+        print("Error detectado:", error)
         client_info = "Datos incorrectos, intentalo de nuevo"
     
     except Exception as error:
@@ -65,7 +65,7 @@ def connect_account(client):
     finally:
         return client_info
 
-def get_account(client, info, cursor):
+def get_account(client, info, cursor): # Busca y guarda los datos de la cuenta del usuario
     query = """
         SELECT id_client, username, password, currency, IBAN
         FROM accounts
@@ -84,7 +84,7 @@ def get_account(client, info, cursor):
 
     return info
 
-def get_client(client, info, cursor):
+def get_client(client, info, cursor): # Busca y guarda los datos del usuario
     query = """
         SELECT name , surname, age, country, email
         FROM clients
@@ -111,7 +111,7 @@ def create_IBAN():
 
     return new_iban
 
-def deposit(client, password, value):
+def deposit(client, password, value): # Gestiona la funcion de depositar dinero
     try:
         if client["password"] == password:
             database = connect_database()
@@ -139,7 +139,7 @@ def deposit(client, password, value):
 
         return False
 
-def withdraw(client, password, value):
+def withdraw(client, password, value): # Gestiona la funcion de retirar dinero
     try:
         database = connect_database()
         cursor = database.cursor()
@@ -164,7 +164,7 @@ def withdraw(client, password, value):
 
         return False
 
-def transfer(client, receiver, password, value):
+def transfer(client, receiver, password, value): # Gestiona la funcion de enviar dinero
     try:
         database = connect_database()
         cursor = database.cursor()
@@ -198,26 +198,32 @@ def transfer(client, receiver, password, value):
 
         return False
     
-def check_transactions(client):
-    database = connect_database()
-    cursor = database.cursor()
+def check_transactions(client): # Busca en la tabla transactions las operaciones realizadas por el usuario
+    try:
+        database = connect_database()
+        cursor = database.cursor()
 
-    query = """
-        SELECT date , time , balance, type
-        FROM transactions
-        WHERE username = %s;
-    """
-    values = (client["username"],)
-    cursor.execute(query, values)
+        query = """
+            SELECT date , time , balance, type
+            FROM transactions
+            WHERE username = %s;
+        """
+        values = (client["username"],)
+        cursor.execute(query, values)
+        
+        account_info = cursor.fetchall()
+        
+        print(account_info)
+        
+        database.commit()
+        database.close()
+
+        return account_info
     
-    account_info = cursor.fetchall()
+    except Exception as error:
+        print("Error detected:", error)
     
-    print(account_info)
-    
-    database.commit()
-    database.close()
-    
-    return account_info
+        return error
     
     
     
