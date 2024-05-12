@@ -111,93 +111,6 @@ def create_IBAN():
 
     return new_iban
 
-def deposit(client, password, value): # Gestiona la funcion de depositar dinero
-    try:
-        if client["password"] == password:
-            database = connect_database()
-            cursor = database.cursor()
-
-            query = """
-                UPDATE accounts
-                SET currency = currency + %s
-                WHERE username = %s AND password = %s;
-            """
-            values = (value, client["username"], password)
-            cursor.execute(query, values)
-
-            print("dinero ingresado")
-
-            database.commit()
-            database.close()
-
-            return True
-        else:
-            return False
-
-    except Exception as error:
-        print("Error detected:", error)
-
-        return False
-
-def withdraw(client, password, value): # Gestiona la funcion de retirar dinero
-    try:
-        database = connect_database()
-        cursor = database.cursor()
-
-        query = """
-            UPDATE accounts
-            SET currency = currency - %s
-            WHERE username = %s AND password = %s;
-        """
-        values = (value, client["username"], password)
-        cursor.execute(query, values)
-
-        print("dinero retirado")
-
-        database.commit()
-        database.close()
-
-        return True
-    
-    except Exception as error:
-        print("Error detected:", error)
-
-        return False
-
-def transfer(client, receiver, password, value): # Gestiona la funcion de enviar dinero
-    try:
-        database = connect_database()
-        cursor = database.cursor()
-
-        withdraw_query = """
-            UPDATE accounts
-            SET currency = currency - %s
-            WHERE username = %s AND password = %s;
-        """
-        deposit_query = """
-            UPDATE accounts
-            SET currency = currency + %s
-            WHERE username = %s;
-        """
-
-        values = (value, client["username"], password)
-        cursor.execute(withdraw_query, values)
-
-        values = (value, receiver)
-        cursor.execute(deposit_query, values)
-
-        print("dinero enviado")
-
-        database.commit()
-        database.close()
-
-        return True
-    
-    except Exception as error:
-        print("Error detected:", error)
-
-        return False
-    
 def check_transactions(client): # Busca en la tabla transactions las operaciones realizadas por el usuario
     try:
         database = connect_database()
@@ -224,6 +137,101 @@ def check_transactions(client): # Busca en la tabla transactions las operaciones
         print("Error detected:", error)
     
         return error
+
+def deposit(client, password, value): # Gestiona la funcion de depositar dinero
+    try:
+        if value > 0:
+            database = connect_database()
+            cursor = database.cursor()
+
+            query = """
+                UPDATE accounts
+                SET currency = currency + %s
+                WHERE username = %s AND password = %s;
+            """
+            values = (value, client["username"], password)
+            cursor.execute(query, values)
+
+            print("dinero ingresado")
+
+            database.commit()
+            database.close()
+
+            return True
+        
+        else:
+            return False
+
+    except Exception as error:
+        print("Error detected:", error)
+    
+        return False
+
+def withdraw(client, password, value): # Gestiona la funcion de retirar dinero
+    try:
+        if value > 0:
+            database = connect_database()
+            cursor = database.cursor()
+
+            query = """
+                UPDATE accounts
+                SET currency = currency - %s
+                WHERE username = %s AND password = %s;
+            """
+            values = (value, client["username"], password)
+            cursor.execute(query, values)
+
+            print("dinero retirado")
+
+            database.commit()
+            database.close()
+
+            return True
+        
+        else:
+            return False
+    
+    except Exception as error:
+        print("Error detected:", error)
+
+        return False
+
+def transfer(client, receiver, password, value): # Gestiona la funcion de enviar dinero
+    try:
+        if value > 0 and client["username"] != receiver:
+            database = connect_database()
+            cursor = database.cursor()
+
+            withdraw_query = """
+                UPDATE accounts
+                SET currency = currency - %s
+                WHERE username = %s AND password = %s;
+            """
+            deposit_query = """
+                UPDATE accounts
+                SET currency = currency + %s
+                WHERE username = %s;
+            """
+
+            values = (value, client["username"], password)
+            cursor.execute(withdraw_query, values)
+
+            values = (value, receiver)
+            cursor.execute(deposit_query, values)
+
+            print("dinero enviado")
+
+            database.commit()
+            database.close()
+
+            return True
+        else:
+            return False
+    
+    except Exception as error:
+        print("Error detected:", error)
+
+        return False
     
     
     
