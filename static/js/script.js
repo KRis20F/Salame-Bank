@@ -10,9 +10,9 @@ const btnLeft = document.querySelector('#btn-left'),
 btnLeft.addEventListener("click", e => moveToLeft());
 btnRight.addEventListener("click", e => moveToRight()); // Corregido el nombre de la función
 
-// setInterval(() => {
-//     moveToRight();
-// },7000)
+setInterval(() => {
+    moveToRight();
+},7000)
 
 let operacion = 0,
     counter = 0,
@@ -53,8 +53,6 @@ function moveToLeft() {
     }
 }
 
-
-
 openButtom.addEventListener("click", () => {
     navHeader.classList.add("visible");
 })
@@ -62,35 +60,5 @@ openButtom.addEventListener("click", () => {
 closeButtom.addEventListener("click", () => {
     navHeader.classList.remove("visible");
 })
-
-
-
-
-
-//animacion entre paginas webs
-
-// barba.init({
-//     transition: [{
-//         name: 'prueba',
-//         leave: function(data) {
-//             var done = this.async();
-//             document.body.classList.add('loading');
-//             setTimeout(function(){
-//                 done();
-//             },900);
-//         },
-//         enter:
-//         function(data) {
-//             var done = this.async();
-//             document.body.classList.add('loading');
-//             setTimeout(function(){
-//                 done();
-//             },900);
-//         }
-//     }]
-// })
-
-// Abrir menu en modo telefono
-
 
 
