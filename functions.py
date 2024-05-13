@@ -126,8 +126,6 @@ def check_transactions(client): # Busca en la tabla transactions las operaciones
         
         account_info = cursor.fetchall()
         
-        print(account_info)
-        
         database.commit()
         database.close()
 
