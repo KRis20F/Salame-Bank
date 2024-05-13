@@ -1,5 +1,5 @@
 import functions, db, os
-from flask import Flask, render_template, request, session, redirect, url_for;
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
