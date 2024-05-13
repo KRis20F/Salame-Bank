@@ -55,7 +55,7 @@ def create_tables(): # Genera las tablas de la base de datos
 
     transactions_table = """
         CREATE TABLE transactions (
-            id_transactions INT AUTO_INCREMENT PRIMARY KEY,
+            id_transaction INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(20),
             old_currency INT,
             new_currency INT,
